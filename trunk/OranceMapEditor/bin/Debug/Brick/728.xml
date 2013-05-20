@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<brick>
+  <texture file="728-1.Animation" divide_x="4" divide_y="6" offset_x="43" offset_y="63" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="10" />
+    <move begin="0" end="0" />
+    <birth begin="11" end="18" />
+    <die begin="19" end="23" />
+  </animation>
+</brick>
