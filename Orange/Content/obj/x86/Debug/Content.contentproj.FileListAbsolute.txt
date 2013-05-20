@@ -1,0 +1,2 @@
+D:\Orange\SLN\Orange\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\old\Orange\SLN\Orange\Content\obj\x86\Debug\ResolveAssemblyReference.cache
