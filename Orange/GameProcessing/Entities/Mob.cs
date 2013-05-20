@@ -4,25 +4,70 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Orange.GameData.Materials;
+using System.Xml;
+using System.IO;
 
 namespace Orange.GameProcessing.Entities
 {
     public class Mob : MovableCharacter
     {
-        public Mob(Vector2 gridPos, string texture):
-            base(gridPos,texture)
+        private int[] idleFrame;
+        private int[] moveFrame;
+        private int[] birthFrame;
+        private int[] dieFrame;
+        public Mob(Vector2 gridPos, string name):
+            base(gridPos,name)
         {
-            moveSpeed = 1;
-            gridPosition = gridPos;
-            mapPosition = gridPosition * 42;
-            newMapPosition = mapPosition;
-            state = 0;
-            animation = new Animation(texture, gridPos * 42, (int)gridPos.Y, 5,7);
-            animation.delay = 50;
-            animation.newAnimation(9, 14);
-            animation.switchAnimation(1, 9);
-            animation.original.X = animation.Width / 2;
-            animation.original.Y = 65;
+            {
+                moveSpeed = 1;
+                gridPosition = gridPos;
+                mapPosition = gridPosition * 42;
+                newMapPosition = mapPosition;
+                state = 0;
+            }
+            {
+                string data = File.ReadAllText("Content/Mob/" + name + ".xml");
+                XmlDocument document = new XmlDocument();
+                XmlElement mobTAG = (XmlElement)document.FirstChild;
+                if (mobTAG.Name != "mob") mobTAG = (XmlElement)mobTAG.NextSibling;
+                XmlElement textureTAG = (XmlElement)mobTAG.FirstChild;
+                XmlElement attributeTAG = (XmlElement)textureTAG.NextSibling;
+                XmlElement animationTAG = (XmlElement)attributeTAG.NextSibling;
+                XmlElement idleTAG = (XmlElement)animationTAG.FirstChild;
+                XmlElement moveTAG = (XmlElement)idleTAG.NextSibling;
+                XmlElement birthTAG = (XmlElement)moveTAG.NextSibling;
+                XmlElement dieTAG = (XmlElement)birthTAG.NextSibling;
+
+                string texture = textureTAG.GetAttribute("file");
+                int dx = int.Parse(textureTAG.GetAttribute("divide_x"));
+                int dy = int.Parse(textureTAG.GetAttribute("divide_y"));
+                int ox = int.Parse(textureTAG.GetAttribute("offset_x"));
+                int oy = int.Parse(textureTAG.GetAttribute("offset_y"));
+                //animation = new Animation("Mob/" + texture,
+                //    mapPosition, (int)gridPos.Y + 1, dx, dy);
+                animation = new Animation("Mob/" + texture, mapPosition, (int)gridPos.Y, dx, dy);
+                animation.original = new Vector2(ox, oy);
+                animation.delay = 60;
+
+                int idleStart = int.Parse(idleTAG.GetAttribute("begin"));
+                int idleEnd = int.Parse(idleTAG.GetAttribute("end"));
+                idleFrame=new int[2]{idleStart,idleEnd};
+                int moveStart = int.Parse(moveTAG.GetAttribute("begin"));
+                int moveEnd = int.Parse(moveTAG.GetAttribute("end"));
+                moveFrame = new int[2] { moveStart, moveEnd }; 
+                int birthStart = int.Parse(birthTAG.GetAttribute("begin"));
+                int birthEnd = int.Parse(birthTAG.GetAttribute("end"));
+                birthFrame = new int[2] { birthStart, birthEnd }; 
+                int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
+                int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
+                dieFrame = new int[2] { dieStart, dieEnd };
+
+
+            }
+
+
+
+            
         }
 
         public override void moveUP()

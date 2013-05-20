@@ -26,7 +26,7 @@ namespace Orange.GameProcessing.Entities
                 string data = File.ReadAllText("Content/Boom/" + name + ".xml");
                 XmlDocument document = new XmlDocument();
                 XmlElement mobTAG = (XmlElement)document.FirstChild;
-                if (mobTAG.Name != "mob") mobTAG = (XmlElement)mobTAG.NextSibling;
+                if (mobTAG.Name != "boom") mobTAG = (XmlElement)mobTAG.NextSibling;
                 XmlElement textureTAG = (XmlElement)mobTAG.FirstChild;
                 XmlElement attributeTAG = (XmlElement)textureTAG.NextSibling;
                 XmlElement animationTAG = (XmlElement)attributeTAG.NextSibling;
@@ -44,12 +44,16 @@ namespace Orange.GameProcessing.Entities
                     mapPosition, (int)gridPos.Y + 1, dx, dy);
                 animation.original = new Vector2(ox, oy);
                 animation.delay = 60;
+
+
                 int idleStart = int.Parse(idleTAG.GetAttribute("begin"));
-                int idleEnd = int.Parse(idleTAG.GetAttribute("begin"));
+                int idleEnd = int.Parse(idleTAG.GetAttribute("end"));
                 idleFrame = new int[2] {idleStart,idleEnd };
                 int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
-                int dieEnd = int.Parse(dieTAG.GetAttribute("begin"));
+                int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 explodeFrame = new int[2] {dieStart,dieEnd };
+
+
             }
             if(false){// load from text
                 string data = File.ReadAllText("Content/Boom/" + name + ".txt");
