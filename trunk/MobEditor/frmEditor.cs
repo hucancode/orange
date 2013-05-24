@@ -278,10 +278,10 @@ namespace MobEditor
                 rootTAG.AppendChild(animationTAG);
             }
             doc.AppendChild(rootTAG);
-            XmlTextWriter writer = new XmlTextWriter(currentFile,Encoding.UTF8);
-            writer.Formatting = Formatting.Indented;
-            doc.Save(writer);
-            writer.Close();
+                XmlTextWriter writer = new XmlTextWriter(currentFile,Encoding.UTF8);
+                writer.Formatting = Formatting.Indented;
+                doc.Save(writer);
+                writer.Close();
             savedTrue();
         }
 
@@ -391,7 +391,7 @@ namespace MobEditor
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coded by hu", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Too lazy to do this", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void numDivX_ValueChanged(object sender, EventArgs e)

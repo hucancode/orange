@@ -61,8 +61,6 @@ namespace Orange.GameProcessing.Entities
                 int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
                 int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 dieFrame = new int[2] { dieStart, dieEnd };
-
-
             }
 
 
