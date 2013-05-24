@@ -254,9 +254,7 @@ namespace OranceMapEditor
                 XmlTextWriter writer = new XmlTextWriter(dlgSave.FileName, Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 doc.Save(writer);
-                writer.Close();
-                MessageBox.Show("da luu");
-            }
+                writer.Close();            }
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
