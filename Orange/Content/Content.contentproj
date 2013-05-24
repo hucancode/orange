@@ -247,57 +247,49 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Brick\Brick.txt">
-      <Name>Brick</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Brick\Chest.txt">
-      <Name>Chest</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Brick\Eye.txt">
-      <Name>Eye</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Brick\696-1.Animation.png">
-      <Name>696-1.Animation</Name>
+    <Compile Include="Boom\WaterBoom.PNG">
+      <Name>WaterBoom</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Brick\707-1.Animation.png">
-      <Name>707-1.Animation</Name>
+    <Compile Include="Boom\WaterTraceBody.PNG">
+      <Name>WaterTraceBody</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Brick\717-1.Animation.png">
-      <Name>717-1.Animation</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Brick\718-1.Animation.png">
-      <Name>718-1.Animation</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Brick\728-1.Animation.png">
-      <Name>728-1.Animation</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Brick\731-1.Animation.png">
-      <Name>731-1.Animation</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Brick\image143.Animation.png">
-      <Name>image143.Animation</Name>
+    <Compile Include="Boom\WaterTraceTop.PNG">
+      <Name>WaterTraceTop</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Boom\WaterBoom.txt">
+      <Name>WaterBoom</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="12345.xml">
+      <Name>12345</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mob\330.xml">
+      <Name>330</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Mob\357.xml">
+      <Name>357</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Brick\1645-1.Animation.png">
       <Name>1645-1.Animation</Name>
       <Importer>TextureImporter</Importer>
@@ -408,6 +400,16 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Brick\696-1.Animation.png">
+      <Name>696-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Brick\707-1.Animation.png">
+      <Name>707-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Brick\709-1.Animation.png">
       <Name>709-1.Animation</Name>
       <Importer>TextureImporter</Importer>
@@ -443,6 +445,16 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Brick\717-1.Animation.png">
+      <Name>717-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Brick\718-1.Animation.png">
+      <Name>718-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Brick\719-1.Animation.png">
       <Name>719-1.Animation</Name>
       <Importer>TextureImporter</Importer>
@@ -475,6 +487,16 @@
     </Compile>
     <Compile Include="Brick\725-1.Animation.png">
       <Name>725-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Brick\728-1.Animation.png">
+      <Name>728-1.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Brick\731-1.Animation.png">
+      <Name>731-1.Animation</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -608,6 +630,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Brick\image143.Animation.png">
+      <Name>image143.Animation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Brick\image154.Animation.png">
       <Name>image154.Animation</Name>
       <Importer>TextureImporter</Importer>
@@ -703,51 +730,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Boom\WaterBoom.PNG">
-      <Name>WaterBoom</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Boom\WaterTraceBody.PNG">
-      <Name>WaterTraceBody</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Boom\WaterTraceTop.PNG">
-      <Name>WaterTraceTop</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Boom\WaterBoom.txt">
-      <Name>WaterBoom</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="12345.xml">
-      <Name>12345</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Mob\330.xml">
-      <Name>330</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Mob\357.xml">
-      <Name>357</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Compile Include="Mob\401-%4063-67-6-8.png">
       <Name>401-%4063-67-6-8</Name>
       <Importer>TextureImporter</Importer>
@@ -755,6 +737,40 @@
     </Compile>
     <None Include="Mob\401.xml">
       <Name>401</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Brick\2697.xml">
+      <Name>2697</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Brick\728.xml">
+      <Name>728</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Brick\739.xml">
+      <Name>739</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Brick\761.xml">
+      <Name>761</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boom.xml">
+      <Name>boom</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

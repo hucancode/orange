@@ -32,9 +32,9 @@ namespace OranceMapEditor
 
         private void frmEditor_Load(object sender, EventArgs e)
         {
-            matrixBrick = new int[11,13];
-            matrixMob = new int[11, 13];
-            renderBitmap = new Bitmap(11*52+1,13*42+1);
+            matrixBrick = new int[13,11];
+            matrixMob = new int[13, 11];
+            renderBitmap = new Bitmap(13*52+1,11*42+1);
             renderer = Graphics.FromImage(renderBitmap);
             drawGrid();
             picPreview.Image = renderBitmap;
@@ -67,6 +67,7 @@ namespace OranceMapEditor
         }
         void DrawMob(int x, int y, int id)
         {
+
             if (x >= matrixMob.GetLength(0)) return;
             if (y >= matrixMob.GetLength(1)) return;
             matrixMob[x, y] = id+1;
@@ -75,38 +76,51 @@ namespace OranceMapEditor
         }
         void DrawCharacter(int x, int y)
         {
+            if (x >= matrixMob.GetLength(0)) return;
+            if (y >= matrixMob.GetLength(1)) return;
             matrixMob[x, y] = -1;
             renderer.FillRectangle(Brushes.DarkGray, 
-                new Rectangle(x * 52 + 1, y * 42 + 1, 42, 42));
+                new Rectangle(x * 52 + 1, y * 42 + 1, 52, 42));
         }
         private void drawGrid()
         {
+            renderer.FillRectangle(Brushes.White, new Rectangle(0, 0, 572, 546));
             Pen pen = new Pen(Brushes.Black);
-            for (int i = 0; i <= 11; i++)
-            {
-                renderer.DrawLine(pen, new Point(i * 52, 0), new Point(i * 52, 13 * 42));
-            }
             for (int i = 0; i <= 13; i++)
             {
-                renderer.DrawLine(pen, new Point(0, i * 42), new Point(11 * 52, i * 42));
+                renderer.DrawLine(pen, new Point(i * 52, 0), new Point(i * 52, 11 * 42));
+            }
+            for (int i = 0; i <= 11; i++)
+            {
+                renderer.DrawLine(pen, new Point(0, i * 42), new Point(13 * 52, i * 42));
             }
         }
 
         private void picPreview_MouseDown(object sender, MouseEventArgs e)
         {
-            Point position = new Point(e.X/52, e.Y/42);
+            Point position = new Point(e.X / 52, e.Y / 42);
             //MessageBox.Show(position.ToString());
-            if (drawMode == DrawMode.BRICK)
+            if (e.Button == MouseButtons.Left)
             {
-                DrawBrick(position.X, position.Y, cboBricks.SelectedIndex);
+                if (drawMode == DrawMode.BRICK)
+                {
+                    DrawBrick(position.X, position.Y, cboBricks.SelectedIndex);
+                }
+                else if (drawMode == DrawMode.MOB)
+                {
+                    DrawMob(position.X, position.Y, cboMobs.SelectedIndex);
+                }
+                else if (drawMode == DrawMode.CHARACTER)
+                {
+                    DrawCharacter(position.X, position.Y);
+                }
             }
-            else if(drawMode== DrawMode.MOB)
+            else
             {
-                DrawMob(position.X, position.Y, cboMobs.SelectedIndex);
-            }
-            else if (drawMode == DrawMode.CHARACTER)
-            {
-                DrawCharacter(position.X, position.Y);
+                matrixMob[position.X, position.Y] = 0;
+                matrixBrick[position.X, position.Y] = 0;
+                renderer.FillRectangle(Brushes.White,
+                new Rectangle(position.X * 52 + 1, position.Y * 42 + 1, 51, 41));
             }
             picPreview.Image = renderBitmap;
         }
@@ -202,9 +216,9 @@ namespace OranceMapEditor
             XmlDocument doc = new XmlDocument();
             XmlElement mapTAG;
             mapTAG = doc.CreateElement("map");
-            for (int i=0; i<11;i++)
+            for (int i=0; i<13;i++)
             {
-                for (int j=0; j < 13; j++)
+                for (int j=0; j < 11; j++)
                 {
                     int id = matrixMob[i, j];
                     if (id == 0) continue;
@@ -220,29 +234,31 @@ namespace OranceMapEditor
                     else
                     {
                         string path = cboMobs.Items[id - 1].ToString();
+                        string pathNoXml = path.Remove(path.Length - 4, 4);
                         XmlElement nodeTAG;
                         nodeTAG = doc.CreateElement("node");
                         nodeTAG.SetAttribute("x", i.ToString());
                         nodeTAG.SetAttribute("y", j.ToString());
                         nodeTAG.SetAttribute("node_type", "MOB");
-                        nodeTAG.SetAttribute("file", path);
+                        nodeTAG.SetAttribute("file", pathNoXml);
                         mapTAG.AppendChild(nodeTAG);
                     }
                 }
             }
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 13; i++)
             {
-                for (int j = 0; j < 13; j++)
+                for (int j = 0; j < 11; j++)
                 {
                     int id = matrixBrick[i, j];
                     if (id == 0) continue;
                     string path = cboBricks.Items[id - 1].ToString();
+                    string pathNoXml = path.Remove(path.Length - 4, 4);
                     XmlElement nodeTAG;
                     nodeTAG = doc.CreateElement("node");
                     nodeTAG.SetAttribute("x", i.ToString());
                     nodeTAG.SetAttribute("y", j.ToString());
                     nodeTAG.SetAttribute("node_type", "BRICK");
-                    nodeTAG.SetAttribute("file", path);
+                    nodeTAG.SetAttribute("file", pathNoXml);
                     mapTAG.AppendChild(nodeTAG);
 
                 }
@@ -254,12 +270,10 @@ namespace OranceMapEditor
                 XmlTextWriter writer = new XmlTextWriter(dlgSave.FileName, Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 doc.Save(writer);
-                writer.Close();            }
+                writer.Close();           
+            }
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
-        {
-                
-        }
+
     }
 }
