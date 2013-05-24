@@ -68,7 +68,7 @@ namespace Orange.GameProcessing.Entities
             fireSolver.fireList = fires;
             fireSolver.mobList = mobs;
             fireSolver.boomList = booms;
-            LoadXml("Content/12345.xml");
+            LoadXml("Content/boom.xml");
         }
         public void LoadXml(string xml)
         {

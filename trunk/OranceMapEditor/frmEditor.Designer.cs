@@ -468,7 +468,7 @@
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(23, 22);
             this.btnOpen.Text = "&Open";
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+    
             // 
             // btnSave
             // 
