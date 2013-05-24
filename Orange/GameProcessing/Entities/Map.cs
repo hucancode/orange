@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using Orange.GameData.Materials;
 using Orange.GameProcessing.Logics;
+using System.Xml;
+using System.IO;
 
 namespace Orange.GameProcessing.Entities
 {
@@ -66,26 +68,59 @@ namespace Orange.GameProcessing.Entities
             fireSolver.fireList = fires;
             fireSolver.mobList = mobs;
             fireSolver.boomList = booms;
-
+            LoadXml("Content/12345.xml");
+        }
+        public void LoadXml(string xml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(File.ReadAllText(xml));
+            XmlElement mapTAG;
+            mapTAG = (XmlElement)doc.FirstChild.NextSibling;
+            XmlElement nodeTAG = (XmlElement)mapTAG.FirstChild;
+            while (nodeTAG != null)
+            {
+                int node_x = int.Parse(nodeTAG.GetAttribute("x"));
+                int node_y = int.Parse(nodeTAG.GetAttribute("y"));
+                string node_type = nodeTAG.GetAttribute("node_type");
+                string file = nodeTAG.GetAttribute("file");
+                if (node_type == "MOB")
+                {
+                    Mob mob = new Mob(new Vector2(node_x, node_y), file);
+                    mobs.Add(mob);
+                }
+                else if (node_type == "BRICK")
+                {
+                    Brick b = new Brick(new Vector2(node_x, node_y), file);
+                    b.Z = node_y + 1;
+                    bricks.Add(b);
+                    brickMap[node_x, node_y] = true;
+                }
+                else if (node_type == "PLAYER")
+                {
+                    Boomer boomer = new Boomer(new Vector2(node_x, node_y), "Boomer/image22.Animation");
+                    boomers.Add(boomer);
+                }
+                nodeTAG = (XmlElement)nodeTAG.NextSibling;
+            }
+            return;
             //Random r = new Random();
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    Brick b = new Brick(new Vector2(i*2 , j*2 ), "Chest");
-                    b.Z = j*2+1;
+                    Brick b = new Brick(new Vector2(i * 2, j * 2), "Chest");
+                    b.Z = j * 2 + 1;
                     bricks.Add(b);
-                    brickMap[i*2, j*2] = true;
+                    brickMap[i * 2, j * 2] = true;
                 }
             }
-            
-            Boomer boomer = new Boomer(new Vector2(7, 6), "Boomer/image22.Animation");
-            boomers.Add(boomer);
 
-            Mob mob = new Mob(new Vector2(3, 6), "Mob/image390.Animation");
-            mobs.Add(mob);
+            //Boomer boomer = new Boomer(new Vector2(7, 6), "Boomer/image22.Animation");
+            //boomers.Add(boomer);
+
+            //Mob mob = new Mob(new Vector2(3, 6), "Mob/image390.Animation");
+            //mobs.Add(mob);
         }
-
         ~Map()
         {
             background.Dispose();

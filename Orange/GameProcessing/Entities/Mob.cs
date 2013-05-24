@@ -15,8 +15,8 @@ namespace Orange.GameProcessing.Entities
         private int[] moveFrame;
         private int[] birthFrame;
         private int[] dieFrame;
-        public Mob(Vector2 gridPos, string name):
-            base(gridPos,name)
+        public Mob(Vector2 gridPos, string name)
+            //:base(gridPos,name)
         {
             {
                 moveSpeed = 1;
@@ -28,8 +28,8 @@ namespace Orange.GameProcessing.Entities
             {
                 string data = File.ReadAllText("Content/Mob/" + name + ".xml");
                 XmlDocument document = new XmlDocument();
-                XmlElement mobTAG = (XmlElement)document.FirstChild;
-                if (mobTAG.Name != "mob") mobTAG = (XmlElement)mobTAG.NextSibling;
+                document.LoadXml(data);
+                XmlElement mobTAG = (XmlElement)document.FirstChild.NextSibling;
                 XmlElement textureTAG = (XmlElement)mobTAG.FirstChild;
                 XmlElement attributeTAG = (XmlElement)textureTAG.NextSibling;
                 XmlElement animationTAG = (XmlElement)attributeTAG.NextSibling;
@@ -62,10 +62,6 @@ namespace Orange.GameProcessing.Entities
                 int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 dieFrame = new int[2] { dieStart, dieEnd };
             }
-
-
-
-            
         }
 
         public override void moveUP()
