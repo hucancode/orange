@@ -328,7 +328,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Font = new System.Drawing.Font("Segoe Print", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(13, 98);
+            this.btnBrowse.Location = new System.Drawing.Point(6, 98);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(175, 62);
             this.btnBrowse.TabIndex = 6;
