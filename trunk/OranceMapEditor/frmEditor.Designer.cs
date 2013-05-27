@@ -81,6 +81,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dlgSave = new System.Windows.Forms.SaveFileDialog();
+            this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picItemPreview)).BeginInit();
@@ -468,7 +469,7 @@
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(23, 22);
             this.btnOpen.Text = "&Open";
-    
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // btnSave
             // 
@@ -538,6 +539,10 @@
             // dlgSave
             // 
             this.dlgSave.Filter = "XML File|*.xml";
+            // 
+            // dlgOpen
+            // 
+            this.dlgOpen.FileName = "openFileDialog1";
             // 
             // frmEditor
             // 
@@ -625,6 +630,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.SaveFileDialog dlgSave;
+        private System.Windows.Forms.OpenFileDialog dlgOpen;
     }
 }
 

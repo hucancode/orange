@@ -274,6 +274,29 @@ namespace OranceMapEditor
             }
         }
 
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            if (dlgOpen.ShowDialog() == DialogResult.OK)
+            {
+                matrixBrick = new int[13, 11];
+                matrixMob = new int[13, 11];
+                renderBitmap = new Bitmap(13 * 52 + 1, 11 * 42 + 1);
+                renderer = Graphics.FromImage(renderBitmap);
+                drawGrid();
+                picPreview.Image = renderBitmap;
+                drawMode = DrawMode.BRICK;
+                cboMobs.Enabled = false;
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(File.ReadAllText(dlgOpen.FileName));
+                XmlElement mapTAG = (XmlElement)doc.FirstChild.NextSibling;
+                XmlElement nodeTAG = null;
+                do
+                {
+                    
+                } while (nodeTAG != null);
+            }
+        }
+
 
     }
 }
