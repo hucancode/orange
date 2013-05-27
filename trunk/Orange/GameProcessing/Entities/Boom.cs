@@ -53,7 +53,6 @@ namespace Orange.GameProcessing.Entities
                 int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 explodeFrame = new int[2] {dieStart,dieEnd };
 
-
             }
             if(false){// load from text
                 string data = File.ReadAllText("Content/Boom/" + name + ".txt");
