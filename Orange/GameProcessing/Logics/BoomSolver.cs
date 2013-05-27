@@ -14,8 +14,8 @@ namespace Orange.GameProcessing.Logics
             {
                 if (item.attempExplode)
                 {
-                    map.AddFire((int)(item.gridPosition.X), (int)(item.gridPosition.Y),
-                        "Boom/WaterTraceBody", 6);
+                    //map.AddFire((int)(item.gridPosition.X), (int)(item.gridPosition.Y),
+                    //    "water_boom", 6);
                     for (int i = 1; i <= 3; i++)
                     {
                         int x = (int)(item.gridPosition.X + i);
@@ -25,7 +25,7 @@ namespace Orange.GameProcessing.Logics
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
                         if (map.brickMap[x, y]) break;
-                        map.AddFire(x, y, "Boom/WaterTraceBody", 6);
+                        map.AddFire(x, y, "water_boom", 6);
                         if (map.boomMap[x, y]) break;
                     }
                     for (int i = -1; i >= -3; i--)
@@ -37,7 +37,7 @@ namespace Orange.GameProcessing.Logics
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
                         if (map.brickMap[x, y]) break;
-                        map.AddFire(x, y, "Boom/WaterTraceBody", 4);
+                        map.AddFire(x, y, "water_boom", 4);
                         if (map.boomMap[x, y]) break;
                     }
                     for (int i = 1; i <= 3; i++)
@@ -49,7 +49,7 @@ namespace Orange.GameProcessing.Logics
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
                         if (map.brickMap[x, y]) break;
-                        map.AddFire(x, y, "Boom/WaterTraceBody", 2);
+                        map.AddFire(x, y, "water_boom", 2);
                         if (map.boomMap[x, y]) break;
                     }
                     for (int i = -1; i >= -3; i--)
@@ -61,7 +61,7 @@ namespace Orange.GameProcessing.Logics
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
                         if (map.brickMap[x, y]) break;
-                        map.AddFire(x, y, "Boom/WaterTraceBody", 8);
+                        map.AddFire(x, y, "water_boom", 8);
                         if (map.boomMap[x, y]) break;
                     }
                 }

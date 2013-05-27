@@ -18,7 +18,7 @@ namespace Orange.GameProcessing.Entities
             mapPosition = gridPosition * 42;
             newMapPosition = mapPosition;
             state = 0;
-            animation = new Animation(texture, gridPos * 42, (int)gridPos.Y, 8,9);
+            animation = new Animation(texture, mapPosition, (int)gridPosition.Y, 8, 9);
             animation.delay = 50;
             animation.newAnimation(10, 10);
             animation.switchAnimation(0, 12);

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <brick>
-  <texture file="739-1.Animation" divide_x="2" divide_y="4" offset_x="0" offset_y="0" />
+  <texture file="739-1.Animation" divide_x="2" divide_y="4" offset_x="47" offset_y="62" />
   <attribute vulnerable="False" passable="False" />
   <animation>
     <idle begin="2" end="2" />
