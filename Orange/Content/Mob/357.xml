@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="image357.Animation" divide_x="5" divide_y="7" offset_x="34" offset_y="53" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="0" />
+    <move begin="10" end="32" />
+    <birth begin="1" end="9" />
+    <die begin="0" end="0" />
+  </animation>
+</mob>

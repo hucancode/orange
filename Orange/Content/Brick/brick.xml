@@ -1,5 +1,0 @@
-<brick>
-	<texture file="717-1.Animation" frame_x = "3" frame_y = "5" offset_x="44" offset_y = "65"/>
-	<animation idle_begin = "0" idle_end="2" explode_begin="3" explode_end="13"/>
-	<attribute vulnerable="true" passable ="false"/>
-</brick>
