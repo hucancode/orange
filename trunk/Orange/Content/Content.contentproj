@@ -264,12 +264,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Boom\WaterBoom.txt">
-      <Name>WaterBoom</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="12345.xml">
       <Name>12345</Name>
       <Importer>XmlImporter</Importer>
