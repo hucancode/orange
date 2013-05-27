@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map>
+  <node x="2" y="2" node_type="MOB" file="330" />
+  <node x="1" y="1" node_type="BRICK" file="2697" />
+</map>

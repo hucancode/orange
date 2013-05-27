@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map>
+  <node x="6" y="8" node_type="PLAYER" />
+  <node x="3" y="2" node_type="BRICK" file="728" />
+  <node x="3" y="3" node_type="BRICK" file="728" />
+  <node x="3" y="4" node_type="BRICK" file="728" />
+  <node x="3" y="5" node_type="BRICK" file="728" />
+  <node x="3" y="6" node_type="BRICK" file="728" />
+  <node x="3" y="7" node_type="BRICK" file="728" />
+  <node x="3" y="8" node_type="BRICK" file="728" />
+  <node x="3" y="9" node_type="BRICK" file="728" />
+  <node x="3" y="10" node_type="BRICK" file="728" />
+  <node x="4" y="2" node_type="BRICK" file="728" />
+  <node x="4" y="3" node_type="BRICK" file="728" />
+  <node x="4" y="4" node_type="BRICK" file="728" />
+  <node x="4" y="5" node_type="BRICK" file="728" />
+  <node x="4" y="6" node_type="BRICK" file="728" />
+  <node x="4" y="7" node_type="BRICK" file="728" />
+  <node x="4" y="8" node_type="BRICK" file="728" />
+  <node x="4" y="9" node_type="BRICK" file="728" />
+  <node x="4" y="10" node_type="BRICK" file="728" />
+  <node x="5" y="3" node_type="BRICK" file="739" />
+  <node x="5" y="4" node_type="BRICK" file="739" />
+  <node x="5" y="5" node_type="BRICK" file="739" />
+  <node x="5" y="6" node_type="BRICK" file="739" />
+  <node x="5" y="7" node_type="BRICK" file="739" />
+  <node x="5" y="9" node_type="BRICK" file="739" />
+  <node x="5" y="10" node_type="BRICK" file="739" />
+ </map>

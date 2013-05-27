@@ -1,8 +1,0 @@
-﻿[Chest]
-File = 717-1.Animation;
-Frame = 3,5
-Offset = 44,65;
-IdleAnimation = 0,0|1,1|2,2;
-ExplodeAnimation = 3,13;
-Vulnerable = 1;
-Passable = 0;
