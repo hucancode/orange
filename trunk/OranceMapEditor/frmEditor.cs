@@ -26,14 +26,14 @@ namespace OranceMapEditor
         }
         Bitmap renderBitmap;
         Graphics renderer;
-        int[,] matrixBrick;
-        int[,] matrixMob;
+        string [,] matrixBrick;
+        string [,] matrixMob;
         DrawMode drawMode;
 
         private void frmEditor_Load(object sender, EventArgs e)
         {
-            matrixBrick = new int[13,11];
-            matrixMob = new int[13, 11];
+            matrixBrick = new string[13, 11];
+            matrixMob = new string[13, 11];
             renderBitmap = new Bitmap(13*52+1,11*42+1);
             renderer = Graphics.FromImage(renderBitmap);
             drawGrid();
@@ -57,28 +57,28 @@ namespace OranceMapEditor
                 if (cboMobs.Items.Count > 0) cboMobs.SelectedIndex = 0;
             }
         }
-        void DrawBrick(int x, int y, int id)
+        void DrawBrick(int x, int y, string xml)
         {
             if (x >= matrixBrick.GetLength(0)) return;
             if (y >= matrixBrick.GetLength(1)) return;
-            matrixBrick[x, y] = id+1;
-            renderer.DrawImage(Crop42((Bitmap)picItemPreview.Image), 
+            matrixBrick[x, y] = xml;
+            renderer.DrawImage(Crop42(GetImageFromXml("Brick/" + xml)), 
                 new Point(x * 52+1, y * 42+1));
         }
-        void DrawMob(int x, int y, int id)
+        void DrawMob(int x, int y, string xml)
         {
 
             if (x >= matrixMob.GetLength(0)) return;
             if (y >= matrixMob.GetLength(1)) return;
-            matrixMob[x, y] = id+1;
-            renderer.DrawImage(Crop42((Bitmap)picItemPreview.Image), 
+            matrixMob[x, y] = xml;
+            renderer.DrawImage(Crop42(GetImageFromXml("Mob/"+xml)), 
                 new Point(x * 52 + 1, y * 42 + 1));
         }
         void DrawCharacter(int x, int y)
         {
             if (x >= matrixMob.GetLength(0)) return;
             if (y >= matrixMob.GetLength(1)) return;
-            matrixMob[x, y] = -1;
+            matrixMob[x, y] = "PLAYER";
             renderer.FillRectangle(Brushes.DarkGray, 
                 new Rectangle(x * 52 + 1, y * 42 + 1, 52, 42));
         }
@@ -104,11 +104,11 @@ namespace OranceMapEditor
             {
                 if (drawMode == DrawMode.BRICK)
                 {
-                    DrawBrick(position.X, position.Y, cboBricks.SelectedIndex);
+                    DrawBrick(position.X, position.Y, cboBricks.SelectedItem.ToString());
                 }
                 else if (drawMode == DrawMode.MOB)
                 {
-                    DrawMob(position.X, position.Y, cboMobs.SelectedIndex);
+                    DrawMob(position.X, position.Y, cboMobs.SelectedItem.ToString());
                 }
                 else if (drawMode == DrawMode.CHARACTER)
                 {
@@ -117,8 +117,8 @@ namespace OranceMapEditor
             }
             else
             {
-                matrixMob[position.X, position.Y] = 0;
-                matrixBrick[position.X, position.Y] = 0;
+                matrixMob[position.X, position.Y] = null;
+                matrixBrick[position.X, position.Y] = null;
                 renderer.FillRectangle(Brushes.White,
                 new Rectangle(position.X * 52 + 1, position.Y * 42 + 1, 51, 41));
             }
@@ -220,9 +220,9 @@ namespace OranceMapEditor
             {
                 for (int j=0; j < 11; j++)
                 {
-                    int id = matrixMob[i, j];
-                    if (id == 0) continue;
-                    if (id == -1)
+                    string path = matrixMob[i, j];
+                    if (path == null || path == "") continue;
+                    if (path == "PLAYER")
                     {
                         XmlElement nodeTAG;
                         nodeTAG = doc.CreateElement("node");
@@ -233,7 +233,6 @@ namespace OranceMapEditor
                     }
                     else
                     {
-                        string path = cboMobs.Items[id - 1].ToString();
                         string pathNoXml = path.Remove(path.Length - 4, 4);
                         XmlElement nodeTAG;
                         nodeTAG = doc.CreateElement("node");
@@ -249,9 +248,8 @@ namespace OranceMapEditor
             {
                 for (int j = 0; j < 11; j++)
                 {
-                    int id = matrixBrick[i, j];
-                    if (id == 0) continue;
-                    string path = cboBricks.Items[id - 1].ToString();
+                    string path = matrixBrick[i, j];
+                    if (path == null || path == "") continue;
                     string pathNoXml = path.Remove(path.Length - 4, 4);
                     XmlElement nodeTAG;
                     nodeTAG = doc.CreateElement("node");
@@ -260,13 +258,11 @@ namespace OranceMapEditor
                     nodeTAG.SetAttribute("node_type", "BRICK");
                     nodeTAG.SetAttribute("file", pathNoXml);
                     mapTAG.AppendChild(nodeTAG);
-
                 }
-                
             }
+            doc.AppendChild(mapTAG);
             if (dlgSave.ShowDialog() == DialogResult.OK)
             {
-                doc.AppendChild(mapTAG);
                 XmlTextWriter writer = new XmlTextWriter(dlgSave.FileName, Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 doc.Save(writer);
@@ -278,8 +274,8 @@ namespace OranceMapEditor
         {
             if (dlgOpen.ShowDialog() == DialogResult.OK)
             {
-                matrixBrick = new int[13, 11];
-                matrixMob = new int[13, 11];
+                matrixBrick = new string[13, 11];
+                matrixMob = new string[13, 11];
                 renderBitmap = new Bitmap(13 * 52 + 1, 11 * 42 + 1);
                 renderer = Graphics.FromImage(renderBitmap);
                 drawGrid();
@@ -289,12 +285,34 @@ namespace OranceMapEditor
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(File.ReadAllText(dlgOpen.FileName));
                 XmlElement mapTAG = (XmlElement)doc.FirstChild.NextSibling;
-                XmlElement nodeTAG = null;
-                do
+                XmlElement nodeTAG = (XmlElement)mapTAG.FirstChild;
+                while (nodeTAG != null)
                 {
-                    
-                } while (nodeTAG != null);
+                    int x = int.Parse(nodeTAG.GetAttribute("x"));
+                    int y = int.Parse(nodeTAG.GetAttribute("y"));
+                    string node_type = nodeTAG.GetAttribute("node_type");
+                    if (node_type == "MOB")
+                    {
+                        string file = nodeTAG.GetAttribute("file");
+                        DrawMob(x, y, file + ".xml");
+                    }
+                    else if (node_type == "PLAYER")
+                    {
+                        DrawCharacter(x, y);
+                    }
+                    else if (node_type == "BRICK")
+                    {
+                        string file = nodeTAG.GetAttribute("file");
+                        DrawBrick(x, y, file + ".xml");
+                    }
+                    nodeTAG = (XmlElement)nodeTAG.NextSibling;
+                }
             }
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Too lazy to do this.", Application.ProductName);
         }
 
 

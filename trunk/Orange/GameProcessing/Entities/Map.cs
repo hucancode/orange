@@ -68,6 +68,7 @@ namespace Orange.GameProcessing.Entities
             fireSolver.fireList = fires;
             fireSolver.mobList = mobs;
             fireSolver.boomList = booms;
+            fireSolver.boomerList = boomers;
             LoadXml("Content/boom.xml");
         }
         public void LoadXml(string xml)
@@ -217,6 +218,10 @@ namespace Orange.GameProcessing.Entities
             {
                 item.UpdateOffset(viewOffset);
             }
+            foreach (Fire item in fires)
+            {
+                item.UpdateOffset(viewOffset);
+            }
         }
         #endregion
 
@@ -224,8 +229,8 @@ namespace Orange.GameProcessing.Entities
         public void Update()
         {
             UpdateObject();
+            SolveGameLogics(); 
             UpdateItemOffset();
-            SolveGameLogics();
         }
         private void SolveGameLogics()
         {
