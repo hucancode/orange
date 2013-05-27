@@ -11,6 +11,7 @@ using Orange.GameData.Materials;
 using Orange.GameProcessing.Logics;
 using System.Xml;
 using System.IO;
+using Orange.GameRender.Scenes;
 
 namespace Orange.GameProcessing.Entities
 {
@@ -263,6 +264,7 @@ namespace Orange.GameProcessing.Entities
                 {
                     brickMap[(int)boomers[i].gridPosition.X, (int)boomers[i].gridPosition.Y] = false;
                     boomers.RemoveAt(i);
+                    
                 }
                 else
                 {
@@ -306,6 +308,11 @@ namespace Orange.GameProcessing.Entities
                 {
                     i++;
                 }
+            }
+            if (boomers.Count == 0)
+            {
+                Global.currentScene = new scnOpen();
+                return;
             }
             Focus(boomers[0].mapPosition);
         }
