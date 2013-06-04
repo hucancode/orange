@@ -90,6 +90,8 @@
     <Compile Include="GameProcessing\Logics\MobBoomerSolver.cs" />
     <Compile Include="GameProcessing\Logics\MovingSolver.cs" />
     <Compile Include="GameProcessing\Logics\FireSolver.cs" />
+    <Compile Include="GameRender\Scenes\SceneLose.cs" />
+    <Compile Include="GameRender\Scenes\SceneWin.cs" />
     <Compile Include="GameRender\Scenes\scnMap.cs" />
     <Compile Include="OrangeInput.cs" />
     <Compile Include="GameProcessing\Entities\Map.cs" />
