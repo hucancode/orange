@@ -43,8 +43,6 @@ namespace Orange.GameProcessing.Entities
                 int dy = int.Parse(textureTAG.GetAttribute("divide_y"));
                 int ox = int.Parse(textureTAG.GetAttribute("offset_x"));
                 int oy = int.Parse(textureTAG.GetAttribute("offset_y"));
-                //animation = new Animation("Mob/" + texture,
-                //    mapPosition, (int)gridPos.Y + 1, dx, dy);
                 animation = new Animation("Mob/" + texture, mapPosition, (int)gridPos.Y, dx, dy);
                 animation.original = new Vector2(ox, oy);
                 animation.delay = 60;
