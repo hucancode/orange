@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Orange.GameProcessing.Entities
 {
-    // TODO: implement Kill() method (done!)
     public class Boomer : MovableCharacter
     {
         public bool attemptPutBoom;

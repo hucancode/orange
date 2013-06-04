@@ -15,7 +15,6 @@ using Orange.GameRender.Scenes;
 
 namespace Orange.GameProcessing.Entities
 {
-    // TODO: load everything from xml(Boom OK, next mob)
     // TODO: scene open
     // TODO: scene win
     // TODO: scene lose
@@ -42,6 +41,7 @@ namespace Orange.GameProcessing.Entities
         private BoomSolver boomSolver;
         private MovingSolver movingSolver;
         private FireSolver fireSolver;
+        private MobBoomerSolver mobBoomerSolver;
         #endregion
 
         #region Initialize
@@ -70,7 +70,10 @@ namespace Orange.GameProcessing.Entities
             fireSolver.mobList = mobs;
             fireSolver.boomList = booms;
             fireSolver.boomerList = boomers;
-            LoadXml("Content/boom.xml");
+            mobBoomerSolver = new MobBoomerSolver();
+            mobBoomerSolver.boomerList = boomers;
+            mobBoomerSolver.mobList = mobs;
+            LoadXml("Content/123455.xml");
         }
         public void LoadXml(string xml)
         {
@@ -222,6 +225,7 @@ namespace Orange.GameProcessing.Entities
             movingSolver.Solve(boomers);
             movingSolver.Solve(mobs);
             fireSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
+            mobBoomerSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
         }
 
         private void UpdateObject()
@@ -293,7 +297,12 @@ namespace Orange.GameProcessing.Entities
             }
             if (boomers.Count == 0)
             {
-                Global.currentScene = new scnOpen();
+                Global.currentScene = new SceneLose();
+                return;
+            }
+            if (mobs.Count == 0)
+            {
+                Global.currentScene = new SceneWin();
                 return;
             }
             Focus(boomers[0].mapPosition);

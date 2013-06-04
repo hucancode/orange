@@ -17,7 +17,8 @@ namespace Orange.GameRender.Scenes
         public scnOpen()
         {
             txtTitle = new TextSprite(110f, 200f, Color.Black, "Orange code name", "Tahoma50");
-            txtSubTitle = new TextSprite(280f, 280f, Color.Black, "Press Enter to continue\nPress Esc for amazing thing", "Tahoma15");
+            txtSubTitle = new TextSprite(280f, 280f, Color.Black, 
+                "Press Enter to continue\nPress Esc for amazing thing\nPress F2 for Win scene\nPress F3 Lose scene", "Tahoma15");
         }
         public override void UnloadContent()
         {
@@ -32,6 +33,14 @@ namespace Orange.GameRender.Scenes
             if (OrangeInput.trigger(Keys.Escape))
             {
                 txtSubTitle.text = "Press Enter to continue\nAmazing thing!";
+            }
+            if (OrangeInput.trigger(Keys.F2))
+            {
+                Global.currentScene = new SceneWin();
+            }
+            if (OrangeInput.trigger(Keys.F3))
+            {
+                Global.currentScene = new SceneLose();
             }
 
         }

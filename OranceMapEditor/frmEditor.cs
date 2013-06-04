@@ -12,8 +12,6 @@ namespace OranceMapEditor
 {
     public partial class frmEditor : Form
     {
-        //TODO: correct editor, using Render() function
-        //TODO: save to xml
         public frmEditor()
         {
             InitializeComponent();
