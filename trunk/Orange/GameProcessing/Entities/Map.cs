@@ -104,24 +104,6 @@ namespace Orange.GameProcessing.Entities
                 }
                 nodeTAG = (XmlElement)nodeTAG.NextSibling;
             }
-            return;
-            //Random r = new Random();
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 6; j++)
-                {
-                    Brick b = new Brick(new Vector2(i * 2, j * 2), "Chest");
-                    b.Z = j * 2 + 1;
-                    bricks.Add(b);
-                    brickMap[i * 2, j * 2] = true;
-                }
-            }
-
-            //Boomer boomer = new Boomer(new Vector2(7, 6), "Boomer/image22.Animation");
-            //boomers.Add(boomer);
-
-            //Mob mob = new Mob(new Vector2(3, 6), "Mob/image390.Animation");
-            //mobs.Add(mob);
         }
         ~Map()
         {
