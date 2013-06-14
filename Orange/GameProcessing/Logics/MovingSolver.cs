@@ -8,7 +8,8 @@ namespace Orange.GameProcessing.Logics
 {
     public class MovingSolver
     {
-        public bool[,] moveMap;
+        public bool[,] brickMap;
+        public bool[,] boomMap;
         public void Solve(List<Mob> characters)
         {
             foreach (MovableCharacter item in characters)
@@ -23,14 +24,17 @@ namespace Orange.GameProcessing.Logics
                 SolveSingleCharacter(item);
             }
         }
-
+        private bool Available(int x, int y)
+        {
+            return !(brickMap[x, y] || boomMap[x, y]);
+        }
         private void SolveSingleCharacter(MovableCharacter item)
         {
             int x = (int)item.GridPosition.X;
             int y = (int)item.GridPosition.Y;
             if (item.attemptMoveUP)
             {
-                if (y != 0 && !moveMap[x, y - 1])
+                if (y != 0 && Available(x, y - 1))
                 {
                     item.doMoveUP();
                 }
@@ -38,7 +42,7 @@ namespace Orange.GameProcessing.Logics
             }
             else if (item.attemptMoveDOWN)
             {
-                if (y != moveMap.GetLength(1) - 1 && !moveMap[x, y + 1])
+                if (y != brickMap.GetLength(1) - 1 && Available(x, y + 1))
                 {
                     item.doMoveDOWN(); 
                 }
@@ -46,7 +50,7 @@ namespace Orange.GameProcessing.Logics
             }
             else if (item.attemptMoveLEFT)
             {
-                if (x != 0 && !moveMap[x - 1, y])
+                if (x != 0 && Available(x - 1, y))
                 {
                     item.doMoveLEFT(); 
                 }
@@ -54,7 +58,7 @@ namespace Orange.GameProcessing.Logics
             }
             else if (item.attemptMoveRIGHT)
             {
-                if (x != moveMap.GetLength(0) - 1 && !moveMap[x + 1, y])
+                if (x != brickMap.GetLength(0) - 1 && Available(x + 1, y))
                 {
                     item.doMoveRIGHT();
                 }

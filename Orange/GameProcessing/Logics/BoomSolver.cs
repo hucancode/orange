@@ -12,7 +12,7 @@ namespace Orange.GameProcessing.Logics
         {
             foreach (Boom item in booms)
             {
-                if (item.attempExplode)
+                if (item.attempExplode && item.state != 1)
                 {
                     //map.AddFire((int)(item.gridPosition.X), (int)(item.gridPosition.Y),
                     //    "water_boom", 6);
@@ -24,9 +24,11 @@ namespace Orange.GameProcessing.Logics
                         if (y < 0) break;
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
-                        if (map.brickMap[x, y]) break;
                         map.AddFire(x, y, "water_boom", 6);
-                        if (map.boomMap[x, y]) break;
+                        if (map.brickMap[x, y]) 
+                            break;
+                        if (map.boomMap[x, y]) 
+                            break;
                     }
                     for (int i = -1; i >= -3; i--)
                     {
@@ -36,9 +38,11 @@ namespace Orange.GameProcessing.Logics
                         if (y < 0) break;
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
-                        if (map.brickMap[x, y]) break;
                         map.AddFire(x, y, "water_boom", 4);
-                        if (map.boomMap[x, y]) break;
+                        if (map.brickMap[x, y]) 
+                            break;
+                        if (map.boomMap[x, y]) 
+                            break;
                     }
                     for (int i = 1; i <= 3; i++)
                     {
@@ -48,9 +52,11 @@ namespace Orange.GameProcessing.Logics
                         if (y < 0) break;
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
-                        if (map.brickMap[x, y]) break;
                         map.AddFire(x, y, "water_boom", 2);
-                        if (map.boomMap[x, y]) break;
+                        if (map.brickMap[x, y]) 
+                            break;
+                        if (map.boomMap[x, y]) 
+                            break;
                     }
                     for (int i = -1; i >= -3; i--)
                     {
@@ -60,9 +66,11 @@ namespace Orange.GameProcessing.Logics
                         if (y < 0) break;
                         if (x >= map.brickMap.GetLength(0)) break;
                         if (y >= map.brickMap.GetLength(1)) break;
-                        if (map.brickMap[x, y]) break;
                         map.AddFire(x, y, "water_boom", 8);
-                        if (map.boomMap[x, y]) break;
+                        if (map.brickMap[x, y]) 
+                            break;
+                        if (map.boomMap[x, y])
+                            break;
                     }
                 }
             }

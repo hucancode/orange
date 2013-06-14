@@ -57,12 +57,13 @@ namespace Orange.GameProcessing.Entities
         public override void Update()
         {
             base.Update();
-            if (state == 1) return;
+            if (state == 2) return;
+            if (attempExplode) state = 1;
             waitTime--;
             if (waitTime <= 0)
                 Kill();
             if (animation.isStop)
-                state = 1;
+                state = 2;
         }
         public void Kill()
         {

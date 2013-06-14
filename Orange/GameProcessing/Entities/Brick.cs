@@ -11,6 +11,7 @@ namespace Orange.GameProcessing.Entities
     public class Brick : Character
     {
         public bool Vulnerable;
+        public bool Passable;
         private int[] idleFrame;
         private int[] explodeFrame;
         public Brick(Vector2 gridPos, string name)
@@ -30,6 +31,8 @@ namespace Orange.GameProcessing.Entities
                 XmlElement moveTAG = (XmlElement)idleTAG.NextSibling;
                 XmlElement birthTAG = (XmlElement)moveTAG.NextSibling;
                 XmlElement dieTAG = (XmlElement)birthTAG.NextSibling;
+                Passable = bool.Parse(attributeTAG.GetAttribute("passable"));
+                Vulnerable = bool.Parse(attributeTAG.GetAttribute("vulnerable"));
 
                 string texture = textureTAG.GetAttribute("file");
                 int dx = int.Parse(textureTAG.GetAttribute("divide_x"));
