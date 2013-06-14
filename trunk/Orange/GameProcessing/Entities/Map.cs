@@ -34,6 +34,7 @@ namespace Orange.GameProcessing.Entities
         public List<Boom> booms;
         public List<Fire> fires;
         public List<Mob> mobs;
+        public List<PowerUp> powers;
         // logics
         public bool [,] brickMap;
         public bool[,] boomMap;
@@ -58,18 +59,17 @@ namespace Orange.GameProcessing.Entities
             fires = new List<Fire>();
             boomers = new List<Boomer>();
             mobs = new List<Mob>();
+            powers = new List<PowerUp>();
 
             boomerSolver = new BoomerSolver();
             boomerSolver.map = this;
             boomSolver = new BoomSolver();
             boomSolver.map = this;
             movingSolver = new MovingSolver();
-            movingSolver.moveMap = this.brickMap;
+            movingSolver.brickMap = brickMap;
+            movingSolver.boomMap = boomMap;
             fireSolver = new FireSolver();
-            fireSolver.fireList = fires;
-            fireSolver.mobList = mobs;
-            fireSolver.boomList = booms;
-            fireSolver.boomerList = boomers;
+            fireSolver.map = this;
             mobBoomerSolver = new MobBoomerSolver();
             mobBoomerSolver.boomerList = boomers;
             mobBoomerSolver.mobList = mobs;
@@ -126,6 +126,11 @@ namespace Orange.GameProcessing.Entities
                 booms[i].Dispose();
             }
             booms.Clear();
+            for (int i = 0; i < powers.Count; i++)
+            {
+                powers[i].Dispose();
+            }
+            powers.Clear();
         }
         #endregion
 
@@ -208,6 +213,10 @@ namespace Orange.GameProcessing.Entities
             {
                 item.UpdateOffset(viewOffset);
             }
+            foreach (PowerUp item in powers)
+            {
+                item.UpdateOffset(viewOffset);
+            }
         }
         #endregion
 
@@ -224,7 +233,7 @@ namespace Orange.GameProcessing.Entities
             boomerSolver.Solve(boomers);
             movingSolver.Solve(boomers);
             movingSolver.Solve(mobs);
-            fireSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
+            fireSolver.Solve();
             mobBoomerSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
         }
 
@@ -248,7 +257,6 @@ namespace Orange.GameProcessing.Entities
                 boomers[i].Update();
                 if (boomers[i].state == 1)//dead
                 {
-                    brickMap[(int)boomers[i].gridPosition.X, (int)boomers[i].gridPosition.Y] = false;
                     boomers.RemoveAt(i);
                     
                 }
@@ -260,7 +268,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < booms.Count; )
             {
                 booms[i].Update();
-                if (booms[i].state == 1)//dead
+                if (booms[i].state == 2)//dead
                 {
                     boomMap[(int)booms[i].gridPosition.X, (int)booms[i].gridPosition.Y] = false;
                     booms.RemoveAt(i);
@@ -287,8 +295,19 @@ namespace Orange.GameProcessing.Entities
                 mobs[i].Update();
                 if (mobs[i].state == 1)//dead
                 {
-                    brickMap[(int)mobs[i].gridPosition.X, (int)mobs[i].gridPosition.Y] = false;
                     mobs.RemoveAt(i);
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            for (int i = 0; i < powers.Count; )
+            {
+                powers[i].Update();
+                if (powers[i].state == 1)//dead
+                {
+                    powers.RemoveAt(i);
                 }
                 else
                 {
@@ -343,6 +362,11 @@ namespace Orange.GameProcessing.Entities
             {
                 item.Draw();
             }
+            foreach (PowerUp item in powers)
+            {
+                item.Draw();
+            }
+
         }
 
         public void Dispose()

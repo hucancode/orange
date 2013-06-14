@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <brick>
   <texture file="2697-1.Animation" divide_x="2" divide_y="4" offset_x="41" offset_y="57" />
-  <attribute vulnerable="False" passable="False" />
+  <attribute vulnerable="true" passable="False" />
   <animation>
     <idle begin="0" end="0" />
     <move begin="0" end="0" />
