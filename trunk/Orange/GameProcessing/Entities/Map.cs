@@ -44,6 +44,7 @@ namespace Orange.GameProcessing.Entities
         private FireSolver fireSolver;
         private MobBoomerSolver mobBoomerSolver;
         private BoomerPowerSolver boomerPowerSolver;
+        private LevelUpSolver levelUpSolver;
         #endregion
 
         #region Initialize
@@ -76,10 +77,27 @@ namespace Orange.GameProcessing.Entities
             mobBoomerSolver.mobList = mobs;
             boomerPowerSolver = new BoomerPowerSolver();
             boomerPowerSolver.map = this;
-            LoadXml("Content/123455.xml");
+            levelUpSolver = new LevelUpSolver();
+            levelUpSolver.map = this;
+            //LoadXml("Content/123455.xml");
         }
         public void LoadXml(string xml)
         {
+            mobs.Clear();
+            boomers.Clear();
+            booms.Clear();
+            bricks.Clear();
+            fires.Clear();
+            powers.Clear();
+            for (int i = 0; i < 13; i++)
+            {
+                for (int j = 0; j < 11; j++)
+                {
+                    brickMap[i, j] = false;
+                    boomMap[i, j] = false;
+                }   
+            }
+
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(File.ReadAllText(xml));
             XmlElement mapTAG;
@@ -226,8 +244,8 @@ namespace Orange.GameProcessing.Entities
         #region Update, Draw, Dispose
         public void Update()
         {
+            SolveGameLogics();
             UpdateObject();
-            SolveGameLogics(); 
             UpdateItemOffset();
         }
         private void SolveGameLogics()
@@ -239,6 +257,7 @@ namespace Orange.GameProcessing.Entities
             boomSolver.Solve();
             mobBoomerSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
             boomerPowerSolver.Solve();
+            levelUpSolver.Solve();
         }
 
         private void UpdateObject()
@@ -318,16 +337,7 @@ namespace Orange.GameProcessing.Entities
                     i++;
                 }
             }
-            if (boomers.Count == 0)
-            {
-                Global.currentScene = new SceneLose();
-                return;
-            }
-            if (mobs.Count == 0)
-            {
-                Global.currentScene = new SceneWin();
-                return;
-            }
+            if (boomers.Count == 0) return;
             Focus(boomers[0].mapPosition);
         }
 

@@ -132,7 +132,7 @@ Content\Stuff\banner_win.xnb
 Content\etc\image424.xnb
 Content\etc\image425.xnb
 Content\etc\image426.xnb
-Content\12345.xml
+Content\Map\12345.xml
 Content\Mob\330.xml
 Content\Mob\357.xml
 Content\Mob\401.xml
@@ -142,4 +142,5 @@ Content\Brick\739.xml
 Content\Brick\761.xml
 Content\boom.xml
 Content\Boom\water_boom.xml
-Content\123455.xml
+Content\Map\123455.xml
+Content\Map\Stage.xml

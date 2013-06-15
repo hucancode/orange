@@ -91,6 +91,7 @@
     <Compile Include="GameProcessing\Logics\BoomerPowerSolver.cs" />
     <Compile Include="GameProcessing\Logics\BoomerSolver.cs" />
     <Compile Include="GameProcessing\Logics\BoomSolver.cs" />
+    <Compile Include="GameProcessing\Logics\LevelUpSolver.cs" />
     <Compile Include="GameProcessing\Logics\MobBoomerSolver.cs" />
     <Compile Include="GameProcessing\Logics\MovingSolver.cs" />
     <Compile Include="GameProcessing\Logics\FireSolver.cs" />
