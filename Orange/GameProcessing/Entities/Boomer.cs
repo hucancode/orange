@@ -10,19 +10,29 @@ namespace Orange.GameProcessing.Entities
     public class Boomer : MovableCharacter
     {
         public bool attemptPutBoom;
+        public int boomLength;
+        public int boomStackMax;
+        public int boomStackCount;
         public Boomer(Vector2 gridPos, string texture)
         {
-            moveSpeed = 3;
-            gridPosition = gridPos;
-            mapPosition = gridPosition * 42;
-            newMapPosition = mapPosition;
-            state = 0;
-            animation = new Animation(texture, mapPosition, (int)gridPosition.Y, 8, 9);
-            animation.delay = 50;
-            animation.newAnimation(10, 10);
-            animation.switchAnimation(0, 12);
-            animation.original.X = animation.Width / 2;
-            animation.original.Y = 105;
+            {
+                moveSpeed = 3;
+                gridPosition = gridPos;
+                mapPosition = gridPosition * 42;
+                newMapPosition = mapPosition;
+                state = 0;
+                animation = new Animation(texture, mapPosition, (int)gridPosition.Y, 8, 9);
+                animation.delay = 50;
+                animation.newAnimation(10, 10);
+                animation.switchAnimation(0, 12);
+                animation.original.X = animation.Width / 2;
+                animation.original.Y = 105;
+            }
+            {
+                boomLength = 3;
+                boomStackMax = 3;
+                boomStackCount = 0;
+            }
         }
         public override void moveUP()
         {
@@ -89,7 +99,10 @@ namespace Orange.GameProcessing.Entities
                 moveRIGHT();
             if (OrangeInput.trigger(Keys.Space))
             {
-                attemptPutBoom = true;
+                if (boomStackCount < boomStackMax)
+                {
+                    attemptPutBoom = true;
+                }
             }
         }
     }

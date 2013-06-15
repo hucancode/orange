@@ -43,6 +43,7 @@ namespace Orange.GameProcessing.Entities
         private MovingSolver movingSolver;
         private FireSolver fireSolver;
         private MobBoomerSolver mobBoomerSolver;
+        private BoomerPowerSolver boomerPowerSolver;
         #endregion
 
         #region Initialize
@@ -73,6 +74,8 @@ namespace Orange.GameProcessing.Entities
             mobBoomerSolver = new MobBoomerSolver();
             mobBoomerSolver.boomerList = boomers;
             mobBoomerSolver.mobList = mobs;
+            boomerPowerSolver = new BoomerPowerSolver();
+            boomerPowerSolver.map = this;
             LoadXml("Content/123455.xml");
         }
         public void LoadXml(string xml)
@@ -229,12 +232,13 @@ namespace Orange.GameProcessing.Entities
         }
         private void SolveGameLogics()
         {
-            boomSolver.Solve(booms);
             boomerSolver.Solve(boomers);
             movingSolver.Solve(boomers);
             movingSolver.Solve(mobs);
             fireSolver.Solve();
+            boomSolver.Solve();
             mobBoomerSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
+            boomerPowerSolver.Solve();
         }
 
         private void UpdateObject()
@@ -327,9 +331,10 @@ namespace Orange.GameProcessing.Entities
             Focus(boomers[0].mapPosition);
         }
 
-        public void AddBoom(int x, int y, string boom)
+        public void AddBoom(int x, int y, string boom, Boomer owner)
         {
             Boom b = new Boom(new Vector2(x, y), boom);
+            b.owner = owner;
             booms.Add(b);
             boomMap[x, y] = true;
         }
