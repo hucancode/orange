@@ -247,7 +247,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="12345.xml">
+    <None Include="Map\12345.xml">
       <Name>12345</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
@@ -779,7 +779,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="123455.xml">
+    <None Include="Map\123455.xml">
       <Name>123455</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
@@ -804,7 +804,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Map\" />
+    <None Include="Map\Stage.xml">
+      <Name>Stage</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
