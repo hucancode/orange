@@ -73,6 +73,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -86,6 +88,7 @@
     <Compile Include="GameProcessing\Entities\Movable.cs" />
     <Compile Include="GameProcessing\Entities\Mob.cs" />
     <Compile Include="GameProcessing\Entities\PowerUp.cs" />
+    <Compile Include="GameProcessing\Logics\BoomerPowerSolver.cs" />
     <Compile Include="GameProcessing\Logics\BoomerSolver.cs" />
     <Compile Include="GameProcessing\Logics\BoomSolver.cs" />
     <Compile Include="GameProcessing\Logics\MobBoomerSolver.cs" />

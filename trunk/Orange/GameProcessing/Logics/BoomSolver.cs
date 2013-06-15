@@ -8,15 +8,16 @@ namespace Orange.GameProcessing.Logics
     class BoomSolver
     {
         public Map map;
-        public void Solve(List<Boom> booms)
+        public void Solve()
         {
-            foreach (Boom item in booms)
+            foreach (Boom item in map.booms)
             {
                 if (item.attempExplode && item.state != 1)
                 {
                     //map.AddFire((int)(item.gridPosition.X), (int)(item.gridPosition.Y),
                     //    "water_boom", 6);
-                    for (int i = 1; i <= 3; i++)
+                    int fire_length = item.owner.boomLength;
+                    for (int i = 1; i <= fire_length; i++)
                     {
                         int x = (int)(item.gridPosition.X + i);
                         int y = (int)(item.gridPosition.Y);
@@ -30,7 +31,7 @@ namespace Orange.GameProcessing.Logics
                         if (map.boomMap[x, y]) 
                             break;
                     }
-                    for (int i = -1; i >= -3; i--)
+                    for (int i = -1; i >= -fire_length; i--)
                     {
                         int x = (int)(item.gridPosition.X + i);
                         int y = (int)(item.gridPosition.Y);
@@ -44,7 +45,7 @@ namespace Orange.GameProcessing.Logics
                         if (map.boomMap[x, y]) 
                             break;
                     }
-                    for (int i = 1; i <= 3; i++)
+                    for (int i = 1; i <= fire_length; i++)
                     {
                         int x = (int)(item.gridPosition.X);
                         int y = (int)(item.gridPosition.Y + i);
@@ -58,7 +59,7 @@ namespace Orange.GameProcessing.Logics
                         if (map.boomMap[x, y]) 
                             break;
                     }
-                    for (int i = -1; i >= -3; i--)
+                    for (int i = -1; i >= -fire_length; i--)
                     {
                         int x = (int)(item.gridPosition.X);
                         int y = (int)(item.gridPosition.Y + i);

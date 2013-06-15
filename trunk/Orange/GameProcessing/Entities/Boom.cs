@@ -11,6 +11,7 @@ namespace Orange.GameProcessing.Entities
     {
         public bool Vulnerable;
         public bool attempExplode;
+        public Boomer owner;
 
         private int waitTime;
         private int kind;
@@ -60,7 +61,7 @@ namespace Orange.GameProcessing.Entities
             if (state == 2) return;
             if (attempExplode) state = 1;
             waitTime--;
-            if (waitTime <= 0)
+            if (waitTime <= 0 && !attempExplode)
                 Kill();
             if (animation.isStop)
                 state = 2;
@@ -71,6 +72,7 @@ namespace Orange.GameProcessing.Entities
             animation.isLoop = false;
             animation.newAnimation(explodeFrame[0], explodeFrame[1]);
             attempExplode = true;
+            owner.boomStackCount--;
         }
     }
 }

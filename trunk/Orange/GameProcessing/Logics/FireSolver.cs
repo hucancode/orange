@@ -52,6 +52,21 @@ namespace Orange.GameProcessing.Logics
                     item.Kill();
                     map.brickMap[x, y] = false;
                     PowerUp power = new PowerUp(new Vector2(x,y));
+                    Random r = new Random();
+                    int n = r.Next(3);
+                    if (n == 0)
+                    {
+                        power.Kind = PowerKind.FIRE_BOOST;
+                    }
+                    else if (n == 1)
+                    {
+                        power.Kind = PowerKind.MAX_BOOM_BOOST;
+                    }
+                    else if (n == 2)
+                    {
+                        power.Kind = PowerKind.SPEED_BOOST;
+                    }
+                    power.RefreshIcon();
                     map.powers.Add(power);
                 }
             }
