@@ -15,11 +15,6 @@ using Orange.GameRender.Scenes;
 
 namespace Orange.GameProcessing.Entities
 {
-    // TODO: scene open
-    // TODO: scene win
-    // TODO: scene lose
-    // TODO: implement entity: Gift
-    // .... so on
     public class Map
     {
         #region Field
@@ -27,7 +22,7 @@ namespace Orange.GameProcessing.Entities
         public Vector2 viewOffset;
         private int moveSpeed;
         public Vector2 size;
-        public Sprite background;
+        private Sprite background;
         // entities
         public List<Brick> bricks;
         public List<Boomer> boomers;
@@ -38,47 +33,23 @@ namespace Orange.GameProcessing.Entities
         // logics
         public bool [,] brickMap;
         public bool[,] boomMap;
-        private BoomerSolver boomerSolver;
-        private BoomSolver boomSolver;
-        private MovingSolver movingSolver;
-        private FireSolver fireSolver;
-        private MobBoomerSolver mobBoomerSolver;
-        private BoomerPowerSolver boomerPowerSolver;
-        private LevelUpSolver levelUpSolver;
         #endregion
 
         #region Initialize
-        public Map(string tex,int w,int h)
+        public Map(string texture,int width,int height)
         {
             viewOffset = Vector2.Zero;
             moveSpeed = 8;
-            size.X = w*42; size.Y = h*42;
-            background = new Sprite(tex, Vector2.Zero, 0);
-            brickMap = new bool[w,h];
-            boomMap = new bool[w, h];
+            size.X = width*42; size.Y = height*42;
+            background = new Sprite(texture, Vector2.Zero, 0);
+            brickMap = new bool[width,height];
+            boomMap = new bool[width, height];
             bricks = new List<Brick>();
             booms = new List<Boom>();
             fires = new List<Fire>();
             boomers = new List<Boomer>();
             mobs = new List<Mob>();
             powers = new List<PowerUp>();
-
-            boomerSolver = new BoomerSolver();
-            boomerSolver.map = this;
-            boomSolver = new BoomSolver();
-            boomSolver.map = this;
-            movingSolver = new MovingSolver();
-            movingSolver.brickMap = brickMap;
-            movingSolver.boomMap = boomMap;
-            fireSolver = new FireSolver();
-            fireSolver.map = this;
-            mobBoomerSolver = new MobBoomerSolver();
-            mobBoomerSolver.boomerList = boomers;
-            mobBoomerSolver.mobList = mobs;
-            boomerPowerSolver = new BoomerPowerSolver();
-            boomerPowerSolver.map = this;
-            levelUpSolver = new LevelUpSolver();
-            levelUpSolver.map = this;
             //LoadXml("Content/123455.xml");
         }
         public void LoadXml(string xml)
@@ -244,20 +215,8 @@ namespace Orange.GameProcessing.Entities
         #region Update, Draw, Dispose
         public void Update()
         {
-            SolveGameLogics();
             UpdateObject();
             UpdateItemOffset();
-        }
-        private void SolveGameLogics()
-        {
-            boomerSolver.Solve(boomers);
-            movingSolver.Solve(boomers);
-            movingSolver.Solve(mobs);
-            fireSolver.Solve();
-            boomSolver.Solve();
-            mobBoomerSolver.Solve(brickMap.GetLength(0), brickMap.GetLength(1));
-            boomerPowerSolver.Solve();
-            levelUpSolver.Solve();
         }
 
         private void UpdateObject()
@@ -265,7 +224,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < bricks.Count; )
             {
                 bricks[i].Update();
-                if (bricks[i].state == 1)//dead
+                if (bricks[i].IsDead())
                 {
                     brickMap[(int)bricks[i].gridPosition.X, (int)bricks[i].gridPosition.Y] = false;
                     bricks.RemoveAt(i);
@@ -278,7 +237,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < boomers.Count; )
             {
                 boomers[i].Update();
-                if (boomers[i].state == 1)//dead
+                if (boomers[i].IsDead())
                 {
                     boomers.RemoveAt(i);
                     
@@ -316,7 +275,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < mobs.Count; )
             {
                 mobs[i].Update();
-                if (mobs[i].state == 1)//dead
+                if (mobs[i].IsDead())//dead
                 {
                     mobs.RemoveAt(i);
                 }
@@ -328,7 +287,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < powers.Count; )
             {
                 powers[i].Update();
-                if (powers[i].state == 1)//dead
+                if (powers[i].IsDead())//dead
                 {
                     powers.RemoveAt(i);
                 }
@@ -348,10 +307,10 @@ namespace Orange.GameProcessing.Entities
             booms.Add(b);
             boomMap[x, y] = true;
         }
-        public void AddFire(int x, int y, string fire, int direction)
+        public void AddFire(int x, int y, string name, int direction)
         {
-            Fire f = new Fire(new Vector2(x,y), fire, direction);
-            fires.Add(f);
+            Fire fire = new Fire(new Vector2(x,y), name, direction);
+            fires.Add(fire);
         }
 
         public void Draw()

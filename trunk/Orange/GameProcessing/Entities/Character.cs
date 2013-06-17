@@ -19,20 +19,20 @@ namespace Orange.GameProcessing.Entities
             }
         }
         public int state;// 0= alive, 1= dead, >1= ...
-        public bool Passable;
+        public bool passable;
         public Character()
         {
             gridPosition = Vector2.Zero;
             mapPosition = gridPosition * 42;
             state = 0;
-            Passable = false;
+            passable = false;
         }
         public Character(Vector2 gridPos, string texture)
         {
             gridPosition = gridPos;
             mapPosition = gridPosition * 42;
             state = 0;
-            Passable = false;
+            passable = false;
             animation = new Animation(texture, gridPos * 42, (int)gridPos.Y+1, 8);
             animation.original.X = animation.Width / 2;
             animation.original.Y = animation.Height;
@@ -49,6 +49,10 @@ namespace Orange.GameProcessing.Entities
         {
             animation.position.X = mapPosition.X - offset.X;
             animation.position.Y = mapPosition.Y - offset.Y;
+        }
+        public bool IsDead()
+        {
+            return state == 1;
         }
         public virtual void Update()
         {

@@ -97,10 +97,10 @@
     <Compile Include="GameProcessing\Logics\FireSolver.cs" />
     <Compile Include="GameRender\Scenes\SceneLose.cs" />
     <Compile Include="GameRender\Scenes\SceneWin.cs" />
-    <Compile Include="GameRender\Scenes\scnMap.cs" />
+    <Compile Include="GameRender\Scenes\SceneMap.cs" />
     <Compile Include="OrangeInput.cs" />
     <Compile Include="GameProcessing\Entities\Map.cs" />
-    <Compile Include="GameRender\Scenes\scnOpen.cs" />
+    <Compile Include="GameRender\Scenes\SceneOpen.cs" />
     <Compile Include="GameRender\Scenes\Scene.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

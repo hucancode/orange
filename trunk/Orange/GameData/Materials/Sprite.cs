@@ -258,7 +258,7 @@ namespace Orange.GameData.Materials
         {
             isStop = false;
         }
-        public void newAnimation(int start, int stop)
+        public void PlayAnimation(int start, int stop)
         {
             if (start == frStart && stop == frStop)
                 return;
@@ -266,7 +266,7 @@ namespace Orange.GameData.Materials
             frStop = stop;
             frCurrent = frStart;
         }
-        public void switchAnimation(int start, int stop)
+        public void SwitchAnimation(int start, int stop)
         {
             if (switching)
                 return;
