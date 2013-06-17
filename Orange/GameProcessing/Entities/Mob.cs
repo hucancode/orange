@@ -9,12 +9,29 @@ using System.IO;
 
 namespace Orange.GameProcessing.Entities
 {
+    public enum MobAction
+	{
+        MOVING_RANDOMLY, 
+        MOVING_TOWARD_PLAYER,
+        EVADE_BOOM
+	}
+    public enum MobAggressive
+	{
+        PASSIVE,
+        FOCUS_BOOM,
+        FOCUS_BOOMER,
+        BALANCE_FOCUS
+	}
     public class Mob : MovableCharacter
     {
         private int[] idleFrame;
         private int[] moveFrame;
         private int[] birthFrame;
         private int[] dieFrame;
+        public MobAggressive aggressive;
+        public MobAction action;
+        public int actionGoalX;
+        public int actionGoalY;
         public Mob(Vector2 gridPos, string name)
             //:base(gridPos,name)
         {
@@ -49,16 +66,22 @@ namespace Orange.GameProcessing.Entities
 
                 int idleStart = int.Parse(idleTAG.GetAttribute("begin"));
                 int idleEnd = int.Parse(idleTAG.GetAttribute("end"));
-                idleFrame=new int[2]{idleStart,idleEnd};
+                idleFrame = new int[2] { idleStart, idleEnd };
                 int moveStart = int.Parse(moveTAG.GetAttribute("begin"));
                 int moveEnd = int.Parse(moveTAG.GetAttribute("end"));
-                moveFrame = new int[2] { moveStart, moveEnd }; 
+                moveFrame = new int[2] { moveStart, moveEnd };
                 int birthStart = int.Parse(birthTAG.GetAttribute("begin"));
                 int birthEnd = int.Parse(birthTAG.GetAttribute("end"));
-                birthFrame = new int[2] { birthStart, birthEnd }; 
+                birthFrame = new int[2] { birthStart, birthEnd };
                 int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
                 int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 dieFrame = new int[2] { dieStart, dieEnd };
+            }
+            {
+                action = MobAction.MOVING_RANDOMLY;
+                actionGoalX = (int)gridPosition.X;
+                actionGoalY = (int)gridPosition.Y;
+                aggressive = MobAggressive.FOCUS_BOOM;
             }
         }
 
@@ -106,7 +129,7 @@ namespace Orange.GameProcessing.Entities
             bool lastMoving = moving;
             UpdatePixelMove();
             if (lastMoving && !moving)
-                animation.PlayAnimation(animation.frStart - 1, animation.frStart - 1);
+                animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
             UpdateAutoMove();
            
         }
@@ -116,33 +139,29 @@ namespace Orange.GameProcessing.Entities
             animation.isLoop = false;
             animation.PlayAnimation(1, 9);
         }
-        private void UpdateAutoMove()
+        public void UpdateAutoMove()
         {
-            if (OrangeInput.trigger(Keys.C))
-                Console.WriteLine(gridPosition.ToString());
-            if (!moving)
+            if (moving) return;
+            int gx = (int)gridPosition.X;
+            int gy = (int)gridPosition.Y;
+            if (actionGoalX != gx || 
+                actionGoalY != gy)
             {
-                Random r = new Random();
-                int i = r.Next(4);
-                if (i == 0)
+                if (actionGoalX > gx)
                 {
-                    Console.WriteLine("Up");
-                    moveUP();
+                    moveRIGHT();
                 }
-                else if (i == 1)
+                else if (actionGoalX < gx)
                 {
-                    Console.WriteLine("Down");
-                    moveDOWN();
-                }
-                else if (i == 2)
-                {
-                    Console.WriteLine("Left");
                     moveLEFT();
                 }
-                else
+                else if (actionGoalY < gy)
                 {
-                    Console.WriteLine("Right");
-                    moveRIGHT();
+                    moveDOWN();
+                }
+                else if (actionGoalY < gy)
+                {
+                    moveUP();
                 }
             }
         }

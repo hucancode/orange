@@ -10,7 +10,7 @@ namespace Orange.GameProcessing.Entities
         public float moveSpeed;
         protected int direction;
         protected Vector2 newMapPosition;
-        protected bool moving;
+        public bool moving;
         public bool attemptMoveUP;
         public bool attemptMoveDOWN;
         public bool attemptMoveLEFT;

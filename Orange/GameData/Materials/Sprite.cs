@@ -196,7 +196,9 @@ namespace Orange.GameData.Materials
         #region Field
         public int delay;
         public bool isLoop, isStop;
-        public int frCountX, frCountY, frCurrent, frStart, frStop, frStartOriginal, frStopOriginal;
+        public int frameCountX, frameCountY, 
+            frameCurrent, frameStart, frameStop, 
+            frameStartOriginal, frameStopOriginal;
         private bool switching;
         private int TimeCount;
         #endregion
@@ -215,29 +217,29 @@ namespace Orange.GameData.Materials
         #region Initialize
         public Animation(string tex, Vector2 pos, int z, int frameX) : base(tex, pos, z)
         {
-            frCurrent = 0;
-            rctImage.Width = texture.Width / frameX;
-            rctImage.Height = texture.Height;
-            frCountX = frameX;
-            frCountY = 1;
+            frameCurrent = 0;
+            rctImage.Width = texture.Width / frameX - 2;
+            rctImage.Height = texture.Height - 2;
+            frameCountX = frameX;
+            frameCountY = 1;
             delay = 50;
             isLoop = true;
-            frStart = 0;
-            frStop = frCountX * frCountY;
+            frameStart = 0;
+            frameStop = frameCountX * frameCountY;
             switching = false;
         }
         public Animation(string tex, Vector2 pos, int z, int frameX,int frameY)
             : base(tex, pos, z)
         {
-            frCurrent = 0;
-            rctImage.Width = texture.Width / frameX;
-            rctImage.Height = texture.Height / frameY;
-            frCountX = frameX;
-            frCountY = frameY;
+            frameCurrent = 0;
+            rctImage.Width = texture.Width / frameX - 2;
+            rctImage.Height = texture.Height / frameY - 2;
+            frameCountX = frameX;
+            frameCountY = frameY;
             delay = 50;
             isLoop = true;
-            frStart = 0;
-            frStop = frCountX*frCountY;
+            frameStart = 0;
+            frameStop = frameCountX*frameCountY;
             switching = false;
         }
         #endregion
@@ -246,8 +248,8 @@ namespace Orange.GameData.Materials
         public void Stop()
         {
             isStop = true;
-            frCurrent = 0;
-            rctImage.X = frCurrent * rctImage.Width;
+            frameCurrent = 0;
+            rctImage.X = frameCurrent * rctImage.Width;
             TimeCount = 0;
         }
         public void Pause()
@@ -260,29 +262,29 @@ namespace Orange.GameData.Materials
         }
         public void PlayAnimation(int start, int stop)
         {
-            if (start == frStart && stop == frStop)
+            if (start == frameStart && stop == frameStop)
                 return;
-            frStart = start;
-            frStop = stop;
-            frCurrent = frStart;
+            frameStart = start;
+            frameStop = stop;
+            frameCurrent = frameStart;
         }
         public void SwitchAnimation(int start, int stop)
         {
             if (switching)
                 return;
             switching = true;
-            frStartOriginal = frStart;
-            frStopOriginal = frStop;
-            frStart = start;
-            frStop = stop;
-            frCurrent = frStart;
+            frameStartOriginal = frameStart;
+            frameStopOriginal = frameStop;
+            frameStart = start;
+            frameStop = stop;
+            frameCurrent = frameStart;
         }
         #endregion
 
         #region Update,Draw,Dispose
         public void Update()
         {
-            if (frStart == frStop)
+            if (frameStart == frameStop)
                 return;
             if (!isStop)
             {
@@ -290,26 +292,26 @@ namespace Orange.GameData.Materials
                 if (TimeCount >= delay)
                 {
                     TimeCount = 0;
-                    frCurrent++;
-                    if (frCurrent == frStop)
+                    frameCurrent++;
+                    if (frameCurrent == frameStop)
                     {
                         if (switching)
                         {
-                            frStart = frStartOriginal;
-                            frCurrent = frStart;
-                            frStop = frStopOriginal;
+                            frameStart = frameStartOriginal;
+                            frameCurrent = frameStart;
+                            frameStop = frameStopOriginal;
                             switching = false;
                         }
                         else
                         {
                             if (isLoop)
-                                frCurrent = frStart;
+                                frameCurrent = frameStart;
                             else
                                 isStop = true;
                         }
                     }
-                    rctImage.Y = (frCurrent / frCountX) * rctImage.Height;
-                    rctImage.X = frCurrent % frCountX * rctImage.Width;
+                    rctImage.Y = (frameCurrent / frameCountX) * (rctImage.Height + 2) + 1;
+                    rctImage.X = frameCurrent % frameCountX * (rctImage.Width + 2) + 1;
                 }
             }
         }
