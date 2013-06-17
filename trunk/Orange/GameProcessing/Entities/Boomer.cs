@@ -29,8 +29,8 @@ namespace Orange.GameProcessing.Entities
                 animation.original.Y = 105;
             }
             {
-                boomLength = 3;
-                boomStackMax = 3;
+                boomLength = 1;
+                boomStackMax = 1;
                 boomStackCount = 0;
             }
         }
@@ -83,7 +83,8 @@ namespace Orange.GameProcessing.Entities
         }
         public void Kill()
         {
-            state = 1;
+            if (IsDead()) return;
+            base.Kill();
             animation.isLoop = false;
             animation.PlayAnimation(68, 78);
         }

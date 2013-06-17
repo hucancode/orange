@@ -224,7 +224,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < bricks.Count; )
             {
                 bricks[i].Update();
-                if (bricks[i].IsDead())
+                if (bricks[i].IsDispose())
                 {
                     brickMap[(int)bricks[i].gridPosition.X, (int)bricks[i].gridPosition.Y] = false;
                     bricks.RemoveAt(i);
@@ -237,7 +237,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < boomers.Count; )
             {
                 boomers[i].Update();
-                if (boomers[i].IsDead())
+                if (boomers[i].IsDispose())
                 {
                     boomers.RemoveAt(i);
                     
@@ -250,7 +250,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < booms.Count; )
             {
                 booms[i].Update();
-                if (booms[i].state == 2)//dead
+                if (booms[i].IsDispose())
                 {
                     boomMap[(int)booms[i].gridPosition.X, (int)booms[i].gridPosition.Y] = false;
                     booms.RemoveAt(i);
@@ -263,7 +263,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < fires.Count; )
             {
                 fires[i].Update();
-                if (fires[i].Disposed)
+                if (fires[i].IsDispose())
                 {
                     fires.RemoveAt(i);
                 }
@@ -275,7 +275,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < mobs.Count; )
             {
                 mobs[i].Update();
-                if (mobs[i].IsDead())//dead
+                if (mobs[i].IsDispose())
                 {
                     mobs.RemoveAt(i);
                 }
@@ -287,7 +287,7 @@ namespace Orange.GameProcessing.Entities
             for (int i = 0; i < powers.Count; )
             {
                 powers[i].Update();
-                if (powers[i].IsDead())//dead
+                if (powers[i].IsDispose())
                 {
                     powers.RemoveAt(i);
                 }

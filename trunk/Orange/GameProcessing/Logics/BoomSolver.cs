@@ -12,8 +12,9 @@ namespace Orange.GameProcessing.Logics
         {
             foreach (Boom item in map.booms)
             {
-                if (item.attempExplode && item.state != 1)
+                if (item.attempExplode)
                 {
+                    item.attempExplode = false;
                     //map.AddFire((int)(item.gridPosition.X), (int)(item.gridPosition.Y),
                     //    "water_boom", 6);
                     int fire_length = item.owner.boomLength;
