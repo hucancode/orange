@@ -89,8 +89,10 @@ namespace Orange.GameProcessing.Entities
         {
             if (moving) return;
             base.moveUP();
-            //if (faceDirection != 8)
-            animation.PlayAnimation(21, 26);
+            int length = moveFrame[1] - moveFrame[0];
+            int start = length * 0 + moveFrame[0];
+            int end = start + length;
+            animation.PlayAnimation(start, length);
             Z = (int)gridPosition.Y + 2;
         }
 
@@ -99,7 +101,10 @@ namespace Orange.GameProcessing.Entities
             if (moving) return;
             base.moveDOWN();
             //if (faceDirection != 2)
-            animation.PlayAnimation(27, 32);
+            int length = moveFrame[1] - moveFrame[0];
+            int start = length * 0 + moveFrame[0];
+            int end = start + length;
+            animation.PlayAnimation(start, length);
             Z = (int)gridPosition.Y + 2;
         }
 
@@ -107,16 +112,20 @@ namespace Orange.GameProcessing.Entities
         {
             if (moving) return;
             base.moveLEFT();
-            //if (faceDirection != 4)
-            animation.PlayAnimation(9, 14);
+            int length = moveFrame[1] - moveFrame[0];
+            int start = length * 0 + moveFrame[0];
+            int end = start + length;
+            animation.PlayAnimation(start, length);
         }
 
         public override void moveRIGHT()
         {
             if (moving) return;
             base.moveRIGHT();
-            //if (faceDirection != 6)
-            animation.PlayAnimation(18, 22);
+            int length = moveFrame[1] - moveFrame[0];
+            int start = length * 0 + moveFrame[0];
+            int end = start + length;
+            animation.PlayAnimation(start, length);
         }
 
         public override void Update()
@@ -135,9 +144,10 @@ namespace Orange.GameProcessing.Entities
         }
         public void Kill()
         {
-            state = 1;
+            if (IsDead()) return;
+            base.Kill();
             animation.isLoop = false;
-            animation.PlayAnimation(1, 9);
+            animation.PlayAnimation(dieFrame[0], dieFrame[1]);
         }
         public void UpdateAutoMove()
         {

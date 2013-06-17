@@ -54,6 +54,10 @@ namespace Orange.GameProcessing.Entities
         {
             return state == 1;
         }
+        public bool IsDispose()
+        {
+            return state == 2;
+        }
         public virtual void Update()
         {
             animation.Update();
@@ -62,8 +66,13 @@ namespace Orange.GameProcessing.Entities
         {
             animation.Draw();
         }
+        public virtual void Kill()
+        {
+            state = 1;
+        }
         public virtual void Dispose()
         {
+            state = 2;
             animation.Dispose();
         }
     }

@@ -12,6 +12,7 @@ namespace Orange.GameProcessing.Logics
         {
             foreach (Boomer item in map.boomers)
             {
+                if (item.IsDead()) continue;
                 if (!item.attemptPutBoom) continue;
                 int x = (int)item.gridPosition.X, y = (int)item.gridPosition.Y;
                 if (map.boomMap[x, y]) continue;

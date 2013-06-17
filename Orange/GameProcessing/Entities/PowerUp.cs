@@ -44,13 +44,15 @@ namespace Orange.GameProcessing.Entities
         public override void Update()
         {
             base.Update();
-            if (animation.isStop) state = 1;
+            if (animation.isStop && IsDead())
+                Dispose();
         }
+        
         public void Kill()
         {
+            if (IsDead()) return;
+            base.Kill();
             animation.isLoop = false;
-            state = 2;
-            //animation.newAnimation(1, 1);
         }
     }
 }

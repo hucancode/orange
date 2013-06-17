@@ -11,7 +11,6 @@ namespace Orange.GameProcessing.Entities
 {
     public class Fire: Character
     {
-        public bool Killed;
         public bool Disposed;
         private int[] birthFrame;
         private int[] explodeFrame;
@@ -80,20 +79,20 @@ namespace Orange.GameProcessing.Entities
         public override void Update()
         {
             base.Update();
-            if (Disposed) return;
-            if (animation.isStop && !Killed)
+            if (IsDispose()) return;
+            if (animation.isStop && !IsDead())
             {
                 Kill();
             }
             else if (animation.isStop)
             {
-                Disposed = true;
                 Dispose();
             }
         }
         public void Kill()
         {
-            Killed = true;
+            if (IsDead()) return;
+            base.Kill();
             animation.PlayAnimation(explodeFrame[0], explodeFrame[1]);
         }
     }
