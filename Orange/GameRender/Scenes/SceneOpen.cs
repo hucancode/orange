@@ -10,11 +10,11 @@ using Orange.GameData.Materials;
 
 namespace Orange.GameRender.Scenes
 {
-    public class scnOpen : Scene
+    public class SceneOpen : Scene
     {
         private TextSprite txtTitle, txtSubTitle;
         private List<Texture2D> textureList = new List<Texture2D>();
-        public scnOpen()
+        public SceneOpen()
         {
             txtTitle = new TextSprite(110f, 200f, Color.Black, "Orange code name", "Tahoma50");
             txtSubTitle = new TextSprite(280f, 280f, Color.Black, 
@@ -28,7 +28,7 @@ namespace Orange.GameRender.Scenes
             if (OrangeInput.trigger(Keys.Enter))
             {
                 //UnloadContent();
-                Global.currentScene = new scnMap();
+                Global.currentScene = new SceneMap();
             }
             if (OrangeInput.trigger(Keys.Escape))
             {
