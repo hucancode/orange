@@ -21,6 +21,7 @@ namespace Orange.GameRender.Scenes
         private MobBoomerSolver mobBoomerSolver;
         private BoomerPowerSolver boomerPowerSolver;
         private LevelUpSolver levelUpSolver;
+        private MobAISolver aiSolver;
         public SceneMap()
         {
             map = new Map("Background/back1Sprite", 13, 11);
@@ -41,6 +42,8 @@ namespace Orange.GameRender.Scenes
             boomerPowerSolver.map = map;
             levelUpSolver = new LevelUpSolver();
             levelUpSolver.map = map;
+            aiSolver = new MobAISolver();
+            aiSolver.map = map;
         }
         public override void UnloadContent()
         {
@@ -54,6 +57,7 @@ namespace Orange.GameRender.Scenes
             mobBoomerSolver.Solve();
             boomerPowerSolver.Solve();
             levelUpSolver.Solve();
+            aiSolver.Solve();
             map.Update();
         }
         public override void Draw()

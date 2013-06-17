@@ -79,7 +79,7 @@ namespace Orange.GameProcessing.Entities
             bool lastMoving = moving;
             UpdatePixelMove();
             if(lastMoving && !moving)
-                animation.PlayAnimation(animation.frStart - 1, animation.frStart - 1);
+                animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
         }
         public void Kill()
         {
