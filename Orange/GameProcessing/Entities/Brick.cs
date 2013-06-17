@@ -51,7 +51,7 @@ namespace Orange.GameProcessing.Entities
                 int explodeEnd = int.Parse(dieTAG.GetAttribute("end"));
                 explodeFrame = new int[2] { explodeStart, explodeEnd };
             }
-            animation.newAnimation(idleFrame[0], idleFrame[1]);
+            animation.PlayAnimation(idleFrame[0], idleFrame[1]);
         }
         public override void Update()
         {
@@ -61,7 +61,7 @@ namespace Orange.GameProcessing.Entities
         public void Kill()
         {
             animation.isLoop = false;
-            animation.newAnimation(explodeFrame[0], explodeFrame[1]);
+            animation.PlayAnimation(explodeFrame[0], explodeFrame[1]);
         }
     }
 }

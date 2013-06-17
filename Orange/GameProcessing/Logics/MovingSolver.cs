@@ -8,25 +8,21 @@ namespace Orange.GameProcessing.Logics
 {
     public class MovingSolver
     {
-        public bool[,] brickMap;
-        public bool[,] boomMap;
-        public void Solve(List<Mob> characters)
+        public Map map;
+        public void Solve()
         {
-            foreach (MovableCharacter item in characters)
+            foreach (MovableCharacter item in map.mobs)
             {
                 SolveSingleCharacter(item);
             }
-        }
-        public void Solve(List<Boomer> characters)
-        {
-            foreach (MovableCharacter item in characters)
+            foreach (MovableCharacter item in map.boomers)
             {
                 SolveSingleCharacter(item);
             }
         }
         private bool Available(int x, int y)
         {
-            return !(brickMap[x, y] || boomMap[x, y]);
+            return !(map.brickMap[x, y] || map.boomMap[x, y]);
         }
         private void SolveSingleCharacter(MovableCharacter item)
         {
@@ -42,7 +38,7 @@ namespace Orange.GameProcessing.Logics
             }
             else if (item.attemptMoveDOWN)
             {
-                if (y != brickMap.GetLength(1) - 1 && Available(x, y + 1))
+                if (y != map.brickMap.GetLength(1) - 1 && Available(x, y + 1))
                 {
                     item.doMoveDOWN(); 
                 }
@@ -58,7 +54,7 @@ namespace Orange.GameProcessing.Logics
             }
             else if (item.attemptMoveRIGHT)
             {
-                if (x != brickMap.GetLength(0) - 1 && Available(x + 1, y))
+                if (x != map.brickMap.GetLength(0) - 1 && Available(x + 1, y))
                 {
                     item.doMoveRIGHT();
                 }

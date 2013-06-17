@@ -8,9 +8,9 @@ namespace Orange.GameProcessing.Logics
     class BoomerSolver
     {
         public Map map;
-        public void Solve(List<Boomer> boomers)
+        public void Solve()
         {
-            foreach (Boomer item in boomers)
+            foreach (Boomer item in map.boomers)
             {
                 if (!item.attemptPutBoom) continue;
                 int x = (int)item.gridPosition.X, y = (int)item.gridPosition.Y;

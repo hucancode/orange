@@ -75,7 +75,7 @@ namespace Orange.GameProcessing.Entities
             
             animation.delay = 60;
             animation.isLoop = false;
-            animation.newAnimation(birthFrame[0], birthFrame[1]);
+            animation.PlayAnimation(birthFrame[0], birthFrame[1]);
         }
         public override void Update()
         {
@@ -94,7 +94,7 @@ namespace Orange.GameProcessing.Entities
         public void Kill()
         {
             Killed = true;
-            animation.newAnimation(explodeFrame[0], explodeFrame[1]);
+            animation.PlayAnimation(explodeFrame[0], explodeFrame[1]);
         }
     }
 }

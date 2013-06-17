@@ -24,21 +24,21 @@ namespace Orange.GameProcessing.Entities
                     mapPosition, (int)gridPosition.Y, 18, 20);
             animation.original = new Vector2(27, 50);
             animation.delay = 60;
-            animation.newAnimation(1, 2);
+            animation.PlayAnimation(1, 2);
         }
         public void RefreshIcon()
         {
             if (Kind == PowerKind.SPEED_BOOST)
             {
-                animation.newAnimation(3, 4);
+                animation.PlayAnimation(3, 4);
             }
             else if (Kind == PowerKind.MAX_BOOM_BOOST)
             {
-                animation.newAnimation(2, 3);
+                animation.PlayAnimation(2, 3);
             }
             else if (Kind == PowerKind.FIRE_BOOST)
             {
-                animation.newAnimation(1, 2);
+                animation.PlayAnimation(1, 2);
             }
         }
         public override void Update()

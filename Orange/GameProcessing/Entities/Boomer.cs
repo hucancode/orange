@@ -23,8 +23,8 @@ namespace Orange.GameProcessing.Entities
                 state = 0;
                 animation = new Animation(texture, mapPosition, (int)gridPosition.Y, 8, 9);
                 animation.delay = 50;
-                animation.newAnimation(10, 10);
-                animation.switchAnimation(0, 12);
+                animation.PlayAnimation(10, 10);
+                animation.SwitchAnimation(0, 12);
                 animation.original.X = animation.Width / 2;
                 animation.original.Y = 105;
             }
@@ -39,7 +39,7 @@ namespace Orange.GameProcessing.Entities
             if (moving) return; 
             base.moveUP();
             //if (faceDirection != 8)
-                animation.newAnimation(23, 27);
+                animation.PlayAnimation(23, 27);
             Z = (int)gridPosition.Y + 2;
         }
 
@@ -48,7 +48,7 @@ namespace Orange.GameProcessing.Entities
             if (moving) return; 
             base.moveDOWN();
             //if (faceDirection != 2)
-                animation.newAnimation(28, 32);
+                animation.PlayAnimation(28, 32);
             Z = (int)gridPosition.Y+2;
         }
 
@@ -57,7 +57,7 @@ namespace Orange.GameProcessing.Entities
             if (moving) return;
             base.moveLEFT();
             //if (faceDirection != 4)
-                animation.newAnimation(13, 17);
+                animation.PlayAnimation(13, 17);
         }
 
         public override void moveRIGHT()
@@ -65,13 +65,13 @@ namespace Orange.GameProcessing.Entities
             if (moving) return; 
             base.moveRIGHT();
             //if (faceDirection != 6)
-                animation.newAnimation(18, 22);
+                animation.PlayAnimation(18, 22);
         }
 
         public override void Update()
         {
             base.Update();
-            if (state == 1 && animation.isStop)
+            if (IsDead() && animation.isStop)
             {
                 Dispose();
             }
@@ -79,13 +79,13 @@ namespace Orange.GameProcessing.Entities
             bool lastMoving = moving;
             UpdatePixelMove();
             if(lastMoving && !moving)
-                animation.newAnimation(animation.frStart - 1, animation.frStart - 1);
+                animation.PlayAnimation(animation.frStart - 1, animation.frStart - 1);
         }
         public void Kill()
         {
             state = 1;
             animation.isLoop = false;
-            animation.newAnimation(68, 78);
+            animation.PlayAnimation(68, 78);
         }
         private void UpdateInput()
         {

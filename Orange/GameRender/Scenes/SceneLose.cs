@@ -29,7 +29,7 @@ namespace Orange.GameRender.Scenes
             if (OrangeInput.trigger(Keys.Enter))
             {
                 //UnloadContent();
-                Global.currentScene = new scnMap();
+                Global.currentScene = new SceneMap();
             }
         }
         public override void Draw()
