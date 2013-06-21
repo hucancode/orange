@@ -75,11 +75,14 @@ namespace Orange.GameProcessing.Entities
             {
                 Dispose();
             }
-            UpdateInput();
-            bool lastMoving = moving;
-            UpdatePixelMove();
-            if(lastMoving && !moving)
-                animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
+            else if(!IsDead())
+            {
+                UpdateInput();
+                bool lastMoving = moving;
+                UpdatePixelMove();
+                if (lastMoving && !moving)
+                    animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
+            }
         }
         public void Kill()
         {

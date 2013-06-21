@@ -76,6 +76,8 @@ namespace Orange.GameProcessing.Entities
                 int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
                 int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
                 dieFrame = new int[2] { dieStart, dieEnd };
+                animation.PlayAnimation(idleFrame[0], idleFrame[1]);
+                animation.SwitchAnimation(birthFrame[0], birthFrame[1]);
             }
             {
                 action = MobAction.MOVING_RANDOMLY;
@@ -89,31 +91,35 @@ namespace Orange.GameProcessing.Entities
         {
             if (moving) return;
             base.moveUP();
-            int length = moveFrame[1] - moveFrame[0];
-            int start = length * 0 + moveFrame[0];
+            direction = 0;
+            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int start = length * direction + moveFrame[0];
             int end = start + length;
             animation.PlayAnimation(start, length);
             Z = (int)gridPosition.Y + 2;
+            
         }
 
         public override void moveDOWN()
         {
             if (moving) return;
             base.moveDOWN();
-            //if (faceDirection != 2)
-            int length = moveFrame[1] - moveFrame[0];
-            int start = length * 0 + moveFrame[0];
+            direction = 2;
+            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int start = length * direction + moveFrame[0];
             int end = start + length;
             animation.PlayAnimation(start, length);
             Z = (int)gridPosition.Y + 2;
+            
         }
 
         public override void moveLEFT()
         {
             if (moving) return;
             base.moveLEFT();
-            int length = moveFrame[1] - moveFrame[0];
-            int start = length * 0 + moveFrame[0];
+            direction = 3;
+            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int start = length * direction + moveFrame[0];
             int end = start + length;
             animation.PlayAnimation(start, length);
         }
@@ -122,8 +128,9 @@ namespace Orange.GameProcessing.Entities
         {
             if (moving) return;
             base.moveRIGHT();
-            int length = moveFrame[1] - moveFrame[0];
-            int start = length * 0 + moveFrame[0];
+            direction = 1;
+            int length = (moveFrame[1] - moveFrame[0])/4;
+            int start = length * direction + moveFrame[0];
             int end = start + length;
             animation.PlayAnimation(start, length);
         }
@@ -138,11 +145,19 @@ namespace Orange.GameProcessing.Entities
             bool lastMoving = moving;
             UpdatePixelMove();
             if (lastMoving && !moving)
-                animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
+                PlayIdle();
             UpdateAutoMove();
            
         }
-        public void Kill()
+
+        private void PlayIdle()
+        {
+            int length = (idleFrame[1] - idleFrame[0]) / 4;
+            int start = length * direction + moveFrame[0];
+            int end = start + length;
+            animation.PlayAnimation(start, length);
+        }
+        public override void Kill()
         {
             if (IsDead()) return;
             base.Kill();
