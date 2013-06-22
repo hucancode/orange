@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <brick>
-  <texture file="2697-1.Animation" divide_x="2" divide_y="4" offset_x="41" offset_y="57" />
+  <texture file="2697-1.Animation" divide_x="2" divide_y="4" />
   <attribute vulnerable="true" passable="False" />
   <animation>
-    <idle begin="0" end="0" />
-    <move begin="0" end="0" />
-    <birth begin="0" end="2" />
-    <die begin="3" end="6" />
+    <idle begin="0" end="0" offset_x="41" offset_y="57" />
+    <move begin="0" end="0" offset_x="41" offset_y="57" />
+    <birth begin="0" end="2" offset_x="41" offset_y="57" />
+    <die begin="3" end="6" offset_x="41" offset_y="57" />
   </animation>
 </brick>

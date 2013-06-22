@@ -81,27 +81,60 @@ namespace MobEditor
             numBirthEnd.Maximum = max;
             numDieBegin.Maximum = max;
             numDieEnd.Maximum = max;
-            numOffX.Maximum = w;
-            numOffY.Maximum = h;
+            numOffX_Idle.Maximum = w;
+            numOffY_Idle.Maximum = h;
+            numOffX_Move.Maximum = w;
+            numOffY_Move.Maximum = h;
+            numOffX_Birth.Maximum = w;
+            numOffY_Birth.Maximum = h;
+            numOffX_Die.Maximum = w;
+            numOffY_Die.Maximum = h;
         }
         void renderBitmap()
         {
             if (pieceBitmaps.Count == 0) return;
-            int offX = (int)numOffX.Value;
-            int offY = (int)numOffY.Value;
+            
             foreach (Bitmap item in renderBitmaps)
             {
                 item.Dispose();
             }
             renderBitmaps.Clear();
+            int i = 0;
             foreach (Bitmap item in pieceBitmaps)
             {
+                int offX, offY;
+                if (i >= numIdleBegin.Value && i <= numIdleEnd.Value)
+                {
+                    offX = (int)numOffX_Idle.Value;
+                    offY = (int)numOffY_Idle.Value;
+                }
+                else if (i >= numMoveBegin.Value && i <= numMoveEnd.Value)
+                {
+                    offX = (int)numOffX_Move.Value;
+                    offY = (int)numOffY_Move.Value;
+                }
+                else if (i >= numBirthBegin.Value && i <= numBirthEnd.Value)
+                {
+                    offX = (int)numOffX_Birth.Value;
+                    offY = (int)numOffY_Birth.Value;
+                }
+                else if (i >= numDieBegin.Value && i <= numDieEnd.Value)
+                {
+                    offX = (int)numOffX_Die.Value;
+                    offY = (int)numOffY_Die.Value;
+                }
+                else
+                {
+                    offX = 0;
+                    offY = 0;
+                }
                 Bitmap render = new Bitmap(item);
                 Graphics g = Graphics.FromImage(render);
                 Pen pen = new Pen(Brushes.Orange);
                 g.DrawLine(pen, new Point(0, offY), new Point(render.Width, offY));
                 g.DrawLine(pen, new Point(offX, 0), new Point(offX, render.Height));
                 renderBitmaps.Add(render);
+                i++;
             }
         }
         int idleFrame = 0;
@@ -247,8 +280,6 @@ namespace MobEditor
                 textureTAG.SetAttribute("file", name);
                 textureTAG.SetAttribute("divide_x", numDivX.Value.ToString());
                 textureTAG.SetAttribute("divide_y", numDivY.Value.ToString());
-                textureTAG.SetAttribute("offset_x", numOffX.Value.ToString());
-                textureTAG.SetAttribute("offset_y", numOffY.Value.ToString());
                 rootTAG.AppendChild(textureTAG);
             }
             XmlElement attributeTAG = doc.CreateElement("attribute");
@@ -262,18 +293,26 @@ namespace MobEditor
                 XmlElement idleTAG = doc.CreateElement("idle");
                 idleTAG.SetAttribute("begin", numIdleBegin.Value.ToString());
                 idleTAG.SetAttribute("end", numIdleEnd.Value.ToString());
+                idleTAG.SetAttribute("offset_x", numOffX_Idle.Value.ToString());
+                idleTAG.SetAttribute("offset_y", numOffY_Idle.Value.ToString());
                 animationTAG.AppendChild(idleTAG);
                 XmlElement moveTAG = doc.CreateElement("move");
                 moveTAG.SetAttribute("begin", numMoveBegin.Value.ToString());
                 moveTAG.SetAttribute("end", numMoveEnd.Value.ToString());
+                moveTAG.SetAttribute("offset_x", numOffX_Move.Value.ToString());
+                moveTAG.SetAttribute("offset_y", numOffY_Move.Value.ToString());
                 animationTAG.AppendChild(moveTAG);
                 XmlElement birthTAG = doc.CreateElement("birth");
                 birthTAG.SetAttribute("begin", numBirthBegin.Value.ToString());
                 birthTAG.SetAttribute("end", numBirthEnd.Value.ToString());
+                birthTAG.SetAttribute("offset_x", numOffX_Birth.Value.ToString());
+                birthTAG.SetAttribute("offset_y", numOffY_Birth.Value.ToString());
                 animationTAG.AppendChild(birthTAG);
                 XmlElement dieTAG = doc.CreateElement("die");
                 dieTAG.SetAttribute("begin", numDieBegin.Value.ToString());
                 dieTAG.SetAttribute("end", numDieEnd.Value.ToString());
+                dieTAG.SetAttribute("offset_x", numOffX_Die.Value.ToString());
+                dieTAG.SetAttribute("offset_y", numOffY_Die.Value.ToString());
                 animationTAG.AppendChild(dieTAG);
                 rootTAG.AppendChild(animationTAG);
             }
@@ -319,12 +358,17 @@ namespace MobEditor
                 int divY = int.Parse(textureTAG.GetAttribute("divide_y"));
                 loadBitmap();
                 cutBitmap();
-                numOffX.Maximum = masterBitmap.Width / divX;
-                numOffY.Maximum = masterBitmap.Height / divY;
+                numOffX_Idle.Maximum = masterBitmap.Width / divX;
+                numOffY_Idle.Maximum = masterBitmap.Height / divY;
+                numOffX_Move.Maximum = masterBitmap.Width / divX;
+                numOffY_Move.Maximum = masterBitmap.Height / divY;
+                numOffX_Birth.Maximum = masterBitmap.Width / divX;
+                numOffY_Birth.Maximum = masterBitmap.Height / divY;
+                numOffX_Die.Maximum = masterBitmap.Width / divX;
+                numOffY_Die.Maximum = masterBitmap.Height / divY;
                 numDivX.Value = divX;
                 numDivY.Value = divY;
-                numOffX.Value = int.Parse(textureTAG.GetAttribute("offset_x"));
-                numOffY.Value = int.Parse(textureTAG.GetAttribute("offset_y"));
+                
                 int max = divX * divY - 1;
                 numIdleBegin.Maximum = max;
                 numIdleEnd.Maximum = max;
@@ -354,6 +398,15 @@ namespace MobEditor
                 XmlElement dieTAG = (XmlElement)birthTAG.NextSibling;
                 numDieBegin.Value = int.Parse(dieTAG.GetAttribute("begin"));
                 numDieEnd.Value = int.Parse(dieTAG.GetAttribute("end"));
+
+                numOffX_Idle.Value = int.Parse(idleTAG.GetAttribute("offset_x"));
+                numOffY_Idle.Value = int.Parse(idleTAG.GetAttribute("offset_y"));
+                numOffX_Move.Value = int.Parse(idleTAG.GetAttribute("offset_x"));
+                numOffY_Move.Value = int.Parse(idleTAG.GetAttribute("offset_y"));
+                numOffX_Birth.Value = int.Parse(idleTAG.GetAttribute("offset_x"));
+                numOffY_Birth.Value = int.Parse(idleTAG.GetAttribute("offset_y"));
+                numOffX_Die.Value = int.Parse(idleTAG.GetAttribute("offset_x"));
+                numOffY_Die.Value = int.Parse(idleTAG.GetAttribute("offset_y"));
             }
             renderBitmap();
             currentFile = dlgOpenXML.FileName;
@@ -404,16 +457,44 @@ namespace MobEditor
             cutBitmap();
         }
 
-        private void numOffX_ValueChanged(object sender, EventArgs e)
+        private void numOffX_Idle_ValueChanged(object sender, EventArgs e)
         {
             renderBitmap();
         }
 
-        private void numOffY_ValueChanged(object sender, EventArgs e)
+        private void numOffY_Idle_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
+        private void numOffX_Move_ValueChanged(object sender, EventArgs e)
         {
             renderBitmap();
         }
 
+        private void numOffY_Move_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
+
+        private void numOffX_Birth_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
+
+        private void numOffY_Birth_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
+
+        private void numOffX_Die_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
+
+        private void numOffY_Die_ValueChanged(object sender, EventArgs e)
+        {
+            renderBitmap();
+        }
         private void tmrUpdateAnimation_Tick(object sender, EventArgs e)
         {
             if (renderBitmaps.Count == 0) return;
@@ -446,29 +527,50 @@ namespace MobEditor
 
         private void picIdle_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.X < numOffX.Maximum)
-                numOffX.Value = e.X;
+            if (e.X < numOffX_Idle.Maximum)
+                numOffX_Idle.Value = e.X;
             else
-                numOffX.Value = numOffX.Maximum;
-            if (e.Y < numOffY.Maximum)
-                numOffY.Value = e.Y;
+                numOffX_Idle.Value = numOffX_Idle.Maximum;
+            if (e.Y < numOffY_Idle.Maximum)
+                numOffY_Idle.Value = e.Y;
             else
-                numOffY.Value = numOffY.Maximum;
+                numOffY_Idle.Value = numOffY_Idle.Maximum;
         }
 
         private void picMove_MouseDown(object sender, MouseEventArgs e)
         {
-            picIdle_MouseDown(sender, e);
+            if (e.X < numOffX_Move.Maximum)
+                numOffX_Move.Value = e.X;
+            else
+                numOffX_Move.Value = numOffX_Move.Maximum;
+            if (e.Y < numOffY_Move.Maximum)
+                numOffY_Move.Value = e.Y;
+            else
+                numOffY_Move.Value = numOffY_Move.Maximum;
         }
 
         private void picBirth_MouseDown(object sender, MouseEventArgs e)
         {
-            picIdle_MouseDown(sender, e);
+            if (e.X < numOffX_Birth.Maximum)
+                numOffX_Birth.Value = e.X;
+            else
+                numOffX_Birth.Value = numOffX_Birth.Maximum;
+            if (e.Y < numOffY_Birth.Maximum)
+                numOffY_Birth.Value = e.Y;
+            else
+                numOffY_Birth.Value = numOffY_Birth.Maximum;
         }
 
         private void picDie_MouseDown(object sender, MouseEventArgs e)
         {
-            picIdle_MouseDown(sender, e);
+            if (e.X < numOffX_Die.Maximum)
+                numOffX_Die.Value = e.X;
+            else
+                numOffX_Die.Value = numOffX_Die.Maximum;
+            if (e.Y < numOffY_Die.Maximum)
+                numOffY_Die.Value = e.Y;
+            else
+                numOffY_Die.Value = numOffY_Die.Maximum;
         }
 
         private void mnNew_Click(object sender, EventArgs e)
@@ -520,5 +622,7 @@ namespace MobEditor
             saved = false;
             this.Text = Application.ProductName + " - " + currentFile + (saved ? "" : "*");
         }
+
+        
     }
 }

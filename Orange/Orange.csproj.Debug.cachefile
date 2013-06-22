@@ -129,6 +129,11 @@ Content\Mob\401-@63-67-6-8.xnb
 Content\Boom\water_boom.xnb
 Content\Stuff\banner_lose.xnb
 Content\Stuff\banner_win.xnb
+Content\Mob\spike_turtle.xnb
+Content\etc\boost_speed.xnb
+Content\etc\boost_boom_length.xnb
+Content\etc\boost_max_boom.xnb
+Content\etc\key.xnb
 Content\Map\12345.xml
 Content\Mob\330.xml
 Content\Mob\357.xml
@@ -142,3 +147,4 @@ Content\Boom\water_boom.xml
 Content\Map\123455.xml
 Content\Map\Stage.xml
 Content\Map\123456.xml
+Content\Mob\spike_turtle.xml

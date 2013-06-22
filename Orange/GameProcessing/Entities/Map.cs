@@ -23,6 +23,7 @@ namespace Orange.GameProcessing.Entities
         private int moveSpeed;
         public Vector2 size;
         private Sprite background;
+        private Sprite keySprite;
         // entities
         public List<Brick> bricks;
         public List<Boomer> boomers;
@@ -33,6 +34,8 @@ namespace Orange.GameProcessing.Entities
         // logics
         public bool [,] brickMap;
         public bool[,] boomMap;
+        public Vector2 keyPosition;
+        public Vector2 keyMapPosition;
         #endregion
 
         #region Initialize
@@ -42,6 +45,8 @@ namespace Orange.GameProcessing.Entities
             moveSpeed = 8;
             size.X = width*42; size.Y = height*42;
             background = new Sprite(texture, Vector2.Zero, 0);
+            keySprite = new Sprite("etc/key", Vector2.Zero, 1);
+            keySprite.original = new Vector2(20, 40);
             brickMap = new bool[width,height];
             boomMap = new bool[width, height];
             bricks = new List<Brick>();
@@ -50,6 +55,8 @@ namespace Orange.GameProcessing.Entities
             boomers = new List<Boomer>();
             mobs = new List<Mob>();
             powers = new List<PowerUp>();
+            keyPosition = new Vector2(-1, -1);
+            keyMapPosition = new Vector2(-100, -100);
             //LoadXml("Content/123455.xml");
         }
         public void LoadXml(string xml)
@@ -68,12 +75,12 @@ namespace Orange.GameProcessing.Entities
                     boomMap[i, j] = false;
                 }   
             }
-
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(File.ReadAllText(xml));
             XmlElement mapTAG;
             mapTAG = (XmlElement)doc.FirstChild.NextSibling;
             XmlElement nodeTAG = (XmlElement)mapTAG.FirstChild;
+            List<Vector2> randomKey = new List<Vector2>();
             while (nodeTAG != null)
             {
                 int node_x = int.Parse(nodeTAG.GetAttribute("x"));
@@ -91,6 +98,10 @@ namespace Orange.GameProcessing.Entities
                     b.Z = node_y + 1;
                     bricks.Add(b);
                     brickMap[node_x, node_y] = true;
+                    if (b.Vulnerable)
+                    {
+                        randomKey.Add(new Vector2(b.GridPosition.X, b.GridPosition.Y));
+                    }
                 }
                 else if (node_type == "PLAYER")
                 {
@@ -99,10 +110,23 @@ namespace Orange.GameProcessing.Entities
                 }
                 nodeTAG = (XmlElement)nodeTAG.NextSibling;
             }
+            if (randomKey.Count > 0)
+            {
+                Random r = new Random();
+                int i = r.Next(randomKey.Count - 1);
+                keyPosition = randomKey[i];
+                keyMapPosition = keyPosition * 42;
+            }
+            else
+            {
+                keyPosition = new Vector2(-1, -1);
+                keyMapPosition = new Vector2(-100, -100);
+            }
         }
         ~Map()
         {
             background.Dispose();
+            keySprite.Dispose();
             for (int i = 0; i < bricks.Count; i++)
             {
                 bricks[i].Dispose();
@@ -185,6 +209,7 @@ namespace Orange.GameProcessing.Entities
 
         private void UpdateItemOffset()
         {
+            keySprite.position = keyMapPosition - viewOffset;
             foreach (Brick item in bricks)
             {
                 item.UpdateOffset(viewOffset);
@@ -212,11 +237,40 @@ namespace Orange.GameProcessing.Entities
         }
         #endregion
 
-        #region Update, Draw, Dispose
+        #region Update, Draw
         public void Update()
         {
             UpdateObject();
             UpdateItemOffset();
+            // debug cheat
+            if (OrangeInput.press(Keys.F2))
+            {
+                // f2 = destroy all brick
+                foreach (Brick item in bricks)
+                {
+                    AddFire((int)item.GridPosition.X,
+                        (int)item.GridPosition.Y,
+                        "water_boom", 6);
+                }
+            }
+            if (OrangeInput.press(Keys.F3))
+            {
+                // f3 = destroy all mob
+                foreach (Mob item in mobs)
+                {
+                    AddFire((int)item.GridPosition.X,
+                        (int)item.GridPosition.Y,
+                        "water_boom", 6);
+                }
+            }
+            if (OrangeInput.press(Keys.F4))
+            {
+                // f4 = destroy all boomers
+                foreach (Mob item in mobs)
+                {
+                    item.Kill();
+                }
+            }
         }
 
         private void UpdateObject()
@@ -240,7 +294,6 @@ namespace Orange.GameProcessing.Entities
                 if (boomers[i].IsDispose())
                 {
                     boomers.RemoveAt(i);
-                    
                 }
                 else
                 {
@@ -316,6 +369,16 @@ namespace Orange.GameProcessing.Entities
         public void Draw()
         {
             background.Draw();
+            if (keyPosition.X > 0 && keyPosition.Y > 0)
+            {
+                bool brickDestroyed = !brickMap[
+                    (int)keyPosition.X,
+                    (int)keyPosition.Y];
+                if (brickDestroyed)
+                {
+                    keySprite.Draw();
+                }
+            }
             foreach (Brick item in bricks)
             {
                 item.Draw();
@@ -340,7 +403,6 @@ namespace Orange.GameProcessing.Entities
             {
                 item.Draw();
             }
-
         }
 
         public void Dispose()

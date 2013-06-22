@@ -27,15 +27,12 @@ namespace Orange.GameProcessing.Entities
             state = 0;
             passable = false;
         }
-        public Character(Vector2 gridPos, string texture)
+        public Character(Vector2 gridPos)
         {
             gridPosition = gridPos;
             mapPosition = gridPosition * 42;
             state = 0;
             passable = false;
-            animation = new Animation(texture, gridPos * 42, (int)gridPos.Y+1, 8);
-            animation.original.X = animation.Width / 2;
-            animation.original.Y = animation.Height;
         }
         public int Z
         {
@@ -45,10 +42,9 @@ namespace Orange.GameProcessing.Entities
                 animation.Z = value;
             }
         }
-        public void UpdateOffset(Vector2 offset)
+        public virtual void UpdateOffset(Vector2 offset)
         {
-            animation.position.X = mapPosition.X - offset.X;
-            animation.position.Y = mapPosition.Y - offset.Y;
+            animation.position = mapPosition - offset;
         }
         public bool IsDead()
         {

@@ -28,10 +28,17 @@ namespace Orange.GameProcessing.Entities
         private int[] moveFrame;
         private int[] birthFrame;
         private int[] dieFrame;
+        private Vector2 idleOff;
+        private Vector2 moveOff;
+        private Vector2 birthOff;
+        private Vector2 dieOff;
         public MobAggressive aggressive;
         public MobAction action;
         public int actionGoalX;
         public int actionGoalY;
+        //..
+        private int idleDelay;
+        private bool lastMoving;
         public Mob(Vector2 gridPos, string name)
             //:base(gridPos,name)
         {
@@ -58,26 +65,39 @@ namespace Orange.GameProcessing.Entities
                 string texture = textureTAG.GetAttribute("file");
                 int dx = int.Parse(textureTAG.GetAttribute("divide_x"));
                 int dy = int.Parse(textureTAG.GetAttribute("divide_y"));
-                int ox = int.Parse(textureTAG.GetAttribute("offset_x"));
-                int oy = int.Parse(textureTAG.GetAttribute("offset_y"));
                 animation = new Animation("Mob/" + texture, mapPosition, (int)gridPos.Y, dx, dy);
-                animation.original = new Vector2(ox, oy);
+                
                 animation.delay = 60;
 
-                int idleStart = int.Parse(idleTAG.GetAttribute("begin"));
-                int idleEnd = int.Parse(idleTAG.GetAttribute("end"));
-                idleFrame = new int[2] { idleStart, idleEnd };
-                int moveStart = int.Parse(moveTAG.GetAttribute("begin"));
-                int moveEnd = int.Parse(moveTAG.GetAttribute("end"));
-                moveFrame = new int[2] { moveStart, moveEnd };
-                int birthStart = int.Parse(birthTAG.GetAttribute("begin"));
-                int birthEnd = int.Parse(birthTAG.GetAttribute("end"));
-                birthFrame = new int[2] { birthStart, birthEnd };
-                int dieStart = int.Parse(dieTAG.GetAttribute("begin"));
-                int dieEnd = int.Parse(dieTAG.GetAttribute("end"));
-                dieFrame = new int[2] { dieStart, dieEnd };
+                idleFrame = new int[2] { int.Parse(idleTAG.GetAttribute("begin")), 
+                    int.Parse(idleTAG.GetAttribute("end")) };
+                idleOff = new Vector2(
+                    int.Parse(idleTAG.GetAttribute("offset_x")),
+                    int.Parse(idleTAG.GetAttribute("offset_y"))
+                    );
+                moveFrame = new int[2] { int.Parse(moveTAG.GetAttribute("begin")), 
+                    int.Parse(moveTAG.GetAttribute("end"))};
+                moveOff = new Vector2(
+                    int.Parse(moveTAG.GetAttribute("offset_x")),
+                    int.Parse(moveTAG.GetAttribute("offset_y"))
+                    );
+                birthFrame = new int[2] { int.Parse(birthTAG.GetAttribute("begin")), 
+                    int.Parse(birthTAG.GetAttribute("end")) };
+                birthOff = new Vector2(
+                    int.Parse(birthTAG.GetAttribute("offset_x")),
+                    int.Parse(birthTAG.GetAttribute("offset_y"))
+                    );
+                dieFrame = new int[2] { int.Parse(dieTAG.GetAttribute("begin")), 
+                    int.Parse(dieTAG.GetAttribute("end"))};
+                dieOff = new Vector2(
+                    int.Parse(dieTAG.GetAttribute("offset_x")),
+                    int.Parse(dieTAG.GetAttribute("offset_y"))
+                    );
+
                 animation.PlayAnimation(idleFrame[0], idleFrame[1]);
+                animation.original = idleOff;
                 animation.SwitchAnimation(birthFrame[0], birthFrame[1]);
+                animation.original = birthOff;
             }
             {
                 action = MobAction.MOVING_RANDOMLY;
@@ -89,73 +109,85 @@ namespace Orange.GameProcessing.Entities
 
         public override void moveUP()
         {
-            if (moving) return;
+            if (moving && idleDelay == 0) return;
             base.moveUP();
             direction = 0;
-            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int length = (moveFrame[1] - moveFrame[0] + 1) / 4;
             int start = length * direction + moveFrame[0];
-            int end = start + length;
-            animation.PlayAnimation(start, length);
+            int end = start + length - 1;
+            //Console.WriteLine("start\t" + start.ToString() + ",\tend\t" + end.ToString());
+            animation.original = moveOff;
+            animation.PlayAnimation(start, end);
             Z = (int)gridPosition.Y + 2;
-            
         }
 
         public override void moveDOWN()
         {
-            if (moving) return;
+            if (moving && idleDelay == 0) return;
             base.moveDOWN();
             direction = 2;
-            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int length = (moveFrame[1] - moveFrame[0] + 1) / 4;
             int start = length * direction + moveFrame[0];
-            int end = start + length;
-            animation.PlayAnimation(start, length);
+            int end = start + length - 1;
+            //Console.WriteLine("start\t" + start.ToString() + ",\tend\t" + end.ToString());
+            animation.original = moveOff;
+            animation.PlayAnimation(start, end);
             Z = (int)gridPosition.Y + 2;
             
         }
 
         public override void moveLEFT()
         {
-            if (moving) return;
+            if (moving && idleDelay == 0) return;
             base.moveLEFT();
             direction = 3;
-            int length = (moveFrame[1] - moveFrame[0]) / 4;
+            int length = (moveFrame[1] - moveFrame[0] + 1) / 4;
             int start = length * direction + moveFrame[0];
-            int end = start + length;
-            animation.PlayAnimation(start, length);
+            int end = start + length - 1;
+            //Console.WriteLine("start\t" + start.ToString() + ",\tend\t" + end.ToString());
+            animation.original = moveOff;
+            animation.PlayAnimation(start, end);
         }
 
         public override void moveRIGHT()
         {
-            if (moving) return;
+            if (moving && idleDelay == 0) return;
             base.moveRIGHT();
             direction = 1;
-            int length = (moveFrame[1] - moveFrame[0])/4;
+            int length = (moveFrame[1] - moveFrame[0] + 1) / 4;
             int start = length * direction + moveFrame[0];
-            int end = start + length;
-            animation.PlayAnimation(start, length);
+            int end = start + length - 1;
+            //Console.WriteLine("start\t" + start.ToString() + ",\tend\t" + end.ToString());
+            animation.original = moveOff;
+            animation.PlayAnimation(start, end);
         }
 
         public override void Update()
         {
+            Console.WriteLine("off: {0} {1}",animation.original.X.ToString(), animation.original.Y.ToString());
             base.Update();
             if (IsDead() && animation.isStop)
             {
                 Dispose();
             }
-            bool lastMoving = moving;
+            if (!moving)
+            {
+                idleDelay--;
+            }
+            lastMoving = moving;
             UpdatePixelMove();
-            if (lastMoving && !moving)
-                PlayIdle();
-            UpdateAutoMove();
-           
+            //UpdateAutoMove();
         }
 
         private void PlayIdle()
         {
-            int length = (idleFrame[1] - idleFrame[0]) / 4;
-            int start = length * direction + moveFrame[0];
-            int end = start + length;
-            animation.PlayAnimation(start, length);
+            idleDelay = 20;
+            int length = (idleFrame[1] - idleFrame[0] + 1) / 4;
+            int start = length * direction + idleFrame[0];
+            int end = start + length - 1;
+            //Console.WriteLine("start\t" + start.ToString() + ",\tend\t" + end.ToString());
+            animation.PlayAnimation(start, end);
+            animation.original = idleOff;
         }
         public override void Kill()
         {
@@ -163,6 +195,7 @@ namespace Orange.GameProcessing.Entities
             base.Kill();
             animation.isLoop = false;
             animation.PlayAnimation(dieFrame[0], dieFrame[1]);
+            animation.original = dieOff;
         }
         public void UpdateAutoMove()
         {

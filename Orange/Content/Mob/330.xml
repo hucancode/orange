@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <mob>
-  <texture file="image330.Animation" divide_x="5" divide_y="6" offset_x="33" offset_y="65" />
+  <texture file="image330.Animation" divide_x="5" divide_y="6"/>
   <attribute vulnerable="True" passable="False" />
   <animation>
-    <idle begin="0" end="0" />
-    <move begin="8" end="26" />
-    <birth begin="1" end="7" />
-    <die begin="0" end="0" />
+    <idle begin="0" end="0"  offset_x="33" offset_y="65" />
+    <move begin="8" end="26"  offset_x="33" offset_y="65" />
+    <birth begin="1" end="7"  offset_x="33" offset_y="65" />
+    <die begin="0" end="0"  offset_x="33" offset_y="65" />
   </animation>
 </mob>

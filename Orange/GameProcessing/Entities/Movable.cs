@@ -24,8 +24,8 @@ namespace Orange.GameProcessing.Entities
             attemptMoveLEFT = false;
             attemptMoveRIGHT = false;
         }
-        public MovableCharacter(Vector2 gridPos, string texture)
-            : base(gridPos, texture)
+        public MovableCharacter(Vector2 gridPos)
+            : base(gridPos)
         {
             moveSpeed = 8;
             attemptMoveUP = false;
@@ -42,7 +42,7 @@ namespace Orange.GameProcessing.Entities
         {
             moving = true;
             newMapPosition.Y -= 42;
-            direction = 8;
+            direction = 0;
         }
         public virtual void moveDOWN()
         {
@@ -64,7 +64,7 @@ namespace Orange.GameProcessing.Entities
         {
             moving = true;
             newMapPosition.X -= 42;
-            direction = 4;
+            direction = 3;
         }
         public virtual void moveRIGHT()
         {
@@ -75,7 +75,7 @@ namespace Orange.GameProcessing.Entities
         {
             moving = true;
             newMapPosition.X += 42;
-            direction = 6;
+            direction = 1;
         }
         protected void UpdatePixelMove()
         {
