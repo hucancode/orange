@@ -14,6 +14,8 @@ namespace Orange.GameProcessing.Entities
         public bool Disposed;
         private int[] birthFrame;
         private int[] explodeFrame;
+        private Vector2 birthOff;
+        private Vector2 explodeOff;
         public Fire(Vector2 pos, string name, int direction)
         {
             gridPosition = pos;
@@ -34,11 +36,8 @@ namespace Orange.GameProcessing.Entities
                 string texture = textureTAG.GetAttribute("file");
                 int dx = int.Parse(textureTAG.GetAttribute("divide_x"));
                 int dy = int.Parse(textureTAG.GetAttribute("divide_y"));
-                int ox = int.Parse(textureTAG.GetAttribute("offset_x"));
-                int oy = int.Parse(textureTAG.GetAttribute("offset_y"));
                 animation = new Animation("Boom/" + texture,
                     mapPosition, (int)gridPosition.Y + 1, dx, dy);
-                //animation.original = new Vector2(ox, oy);
                 animation.delay = 60;
                 if (direction == 4)
                 {
@@ -64,17 +63,24 @@ namespace Orange.GameProcessing.Entities
                     animation.original = new Vector2(animation.Width/2,
                         animation.Height);
                 }
-                int birthStart = int.Parse(birthTAG.GetAttribute("begin"));
-                int birthEnd = int.Parse(birthTAG.GetAttribute("end"));
-                birthFrame = new int[2] { birthStart, birthEnd };
-                int dieStart = int.Parse(moveTAG.GetAttribute("begin"));
-                int dieEnd = int.Parse(moveTAG.GetAttribute("end"));
-                explodeFrame = new int[2] { dieStart, dieEnd };
+                explodeFrame = new int[2] { int.Parse(moveTAG.GetAttribute("begin")), 
+                    int.Parse(moveTAG.GetAttribute("end"))};
+                explodeOff = new Vector2(
+                    int.Parse(idleTAG.GetAttribute("offset_x")),
+                    int.Parse(idleTAG.GetAttribute("offset_y"))
+                    );
+                birthFrame = new int[2] { int.Parse(birthTAG.GetAttribute("begin")), 
+                    int.Parse(birthTAG.GetAttribute("end")) };
+                birthOff = new Vector2(
+                    int.Parse(birthTAG.GetAttribute("offset_x")),
+                    int.Parse(birthTAG.GetAttribute("offset_y"))
+                    );
             }
             
             animation.delay = 60;
             animation.isLoop = false;
             animation.PlayAnimation(birthFrame[0], birthFrame[1]);
+            //animation.original = birthOff;
         }
         public override void Update()
         {
@@ -94,6 +100,7 @@ namespace Orange.GameProcessing.Entities
             if (IsDead()) return;
             base.Kill();
             animation.PlayAnimation(explodeFrame[0], explodeFrame[1]);
+            //animation.original = explodeOff;
         }
     }
 }

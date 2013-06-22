@@ -15,44 +15,52 @@ namespace Orange.GameProcessing.Entities
     public class PowerUp : Character
     {
         public PowerKind Kind;
+        private Sprite sprite;
         public PowerUp(Vector2 gridPos)
         {
             gridPosition = gridPos;
             mapPosition = gridPosition * 42;
             state = 0;
-            animation = new Animation("etc/11-1.Animation",
-                    mapPosition, (int)gridPosition.Y, 18, 20);
-            animation.original = new Vector2(27, 50);
-            animation.delay = 60;
-            animation.PlayAnimation(1, 2);
+            sprite = new Sprite("etc/boost_speed",
+                mapPosition, (int)mapPosition.Y);
+            sprite.original = new Vector2(20, 40);
         }
         public void RefreshIcon()
         {
             if (Kind == PowerKind.SPEED_BOOST)
             {
-                animation.PlayAnimation(3, 4);
+                sprite = new Sprite("etc/boost_speed",
+                mapPosition, (int)mapPosition.Y);
             }
             else if (Kind == PowerKind.MAX_BOOM_BOOST)
             {
-                animation.PlayAnimation(2, 3);
+                sprite = new Sprite("etc/boost_max_boom",
+                mapPosition, (int)mapPosition.Y);
             }
             else if (Kind == PowerKind.FIRE_BOOST)
             {
-                animation.PlayAnimation(1, 2);
+                sprite = new Sprite("etc/boost_boom_length",
+                mapPosition, (int)mapPosition.Y);
             }
+            sprite.original = new Vector2(20, 40);
         }
         public override void Update()
         {
-            base.Update();
-            if (animation.isStop && IsDead())
-                Dispose();
+            //base.Update();
         }
-        
+        public override void Draw()
+        {
+            sprite.Draw();
+        }
+        public override void UpdateOffset(Vector2 offset)
+        {
+            sprite.position.X = mapPosition.X - offset.X;
+            sprite.position.Y = mapPosition.Y - offset.Y;
+        }
         public void Kill()
         {
             if (IsDead()) return;
-            base.Kill();
-            animation.isLoop = false;
+            state = 2;
         }
     }
 }

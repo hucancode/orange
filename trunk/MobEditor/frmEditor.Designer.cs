@@ -51,12 +51,21 @@
             this.numDivY = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numOffX_Die = new System.Windows.Forms.NumericUpDown();
+            this.numOffX_Birth = new System.Windows.Forms.NumericUpDown();
+            this.numOffX_Move = new System.Windows.Forms.NumericUpDown();
+            this.numOffX_Idle = new System.Windows.Forms.NumericUpDown();
+            this.numOffY_Die = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numOffY_Birth = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numOffY_Move = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numOffY_Idle = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtTexturePath = new System.Windows.Forms.TextBox();
-            this.numOffX = new System.Windows.Forms.NumericUpDown();
-            this.numOffY = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnOpen = new System.Windows.Forms.ToolStripButton();
@@ -64,6 +73,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.chkPassable = new System.Windows.Forms.CheckBox();
             this.chkVulnerable = new System.Windows.Forms.CheckBox();
             this.cboMobBrick = new System.Windows.Forms.ComboBox();
@@ -94,9 +104,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDivX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDivY)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Die)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Birth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Move)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Idle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Die)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Birth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Move)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Idle)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOffX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOffY)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -109,7 +125,7 @@
             this.picIdle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picIdle.Location = new System.Drawing.Point(212, 333);
             this.picIdle.Name = "picIdle";
-            this.picIdle.Size = new System.Drawing.Size(96, 96);
+            this.picIdle.Size = new System.Drawing.Size(96, 166);
             this.picIdle.TabIndex = 0;
             this.picIdle.TabStop = false;
             this.picIdle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picIdle_MouseDown);
@@ -121,7 +137,7 @@
             this.picSheet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSheet.Location = new System.Drawing.Point(212, 28);
             this.picSheet.Name = "picSheet";
-            this.picSheet.Size = new System.Drawing.Size(400, 300);
+            this.picSheet.Size = new System.Drawing.Size(493, 300);
             this.picSheet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSheet.TabIndex = 1;
             this.picSheet.TabStop = false;
@@ -133,7 +149,7 @@
             this.picMove.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picMove.Location = new System.Drawing.Point(314, 333);
             this.picMove.Name = "picMove";
-            this.picMove.Size = new System.Drawing.Size(96, 96);
+            this.picMove.Size = new System.Drawing.Size(96, 166);
             this.picMove.TabIndex = 0;
             this.picMove.TabStop = false;
             this.picMove.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picMove_MouseDown);
@@ -145,7 +161,7 @@
             this.picBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picBirth.Location = new System.Drawing.Point(416, 334);
             this.picBirth.Name = "picBirth";
-            this.picBirth.Size = new System.Drawing.Size(96, 96);
+            this.picBirth.Size = new System.Drawing.Size(96, 166);
             this.picBirth.TabIndex = 0;
             this.picBirth.TabStop = false;
             this.picBirth.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBirth_MouseDown);
@@ -157,7 +173,7 @@
             this.picDie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picDie.Location = new System.Drawing.Point(518, 334);
             this.picDie.Name = "picDie";
-            this.picDie.Size = new System.Drawing.Size(96, 96);
+            this.picDie.Size = new System.Drawing.Size(96, 166);
             this.picDie.TabIndex = 0;
             this.picDie.TabStop = false;
             this.picDie.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picDie_MouseDown);
@@ -291,8 +307,20 @@
             // 
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.numOffX_Die);
+            this.groupBox1.Controls.Add(this.numOffX_Birth);
+            this.groupBox1.Controls.Add(this.numOffX_Move);
+            this.groupBox1.Controls.Add(this.numOffX_Idle);
             this.groupBox1.Controls.Add(this.numIdleBegin);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.numOffY_Die);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.numOffY_Birth);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.numOffY_Move);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.numOffY_Idle);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.numIdleEnd);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.numMoveBegin);
@@ -301,34 +329,132 @@
             this.groupBox1.Controls.Add(this.numDieEnd);
             this.groupBox1.Controls.Add(this.numBirthEnd);
             this.groupBox1.Controls.Add(this.numDieBegin);
-            this.groupBox1.Location = new System.Drawing.Point(15, 200);
+            this.groupBox1.Location = new System.Drawing.Point(15, 172);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 130);
+            this.groupBox1.Size = new System.Drawing.Size(191, 228);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animation";
+            // 
+            // numOffX_Die
+            // 
+            this.numOffX_Die.Location = new System.Drawing.Point(65, 201);
+            this.numOffX_Die.Name = "numOffX_Die";
+            this.numOffX_Die.Size = new System.Drawing.Size(54, 20);
+            this.numOffX_Die.TabIndex = 3;
+            this.numOffX_Die.ValueChanged += new System.EventHandler(this.numOffX_Die_ValueChanged);
+            // 
+            // numOffX_Birth
+            // 
+            this.numOffX_Birth.Location = new System.Drawing.Point(65, 175);
+            this.numOffX_Birth.Name = "numOffX_Birth";
+            this.numOffX_Birth.Size = new System.Drawing.Size(54, 20);
+            this.numOffX_Birth.TabIndex = 3;
+            this.numOffX_Birth.ValueChanged += new System.EventHandler(this.numOffX_Birth_ValueChanged);
+            // 
+            // numOffX_Move
+            // 
+            this.numOffX_Move.Location = new System.Drawing.Point(65, 149);
+            this.numOffX_Move.Name = "numOffX_Move";
+            this.numOffX_Move.Size = new System.Drawing.Size(54, 20);
+            this.numOffX_Move.TabIndex = 3;
+            this.numOffX_Move.ValueChanged += new System.EventHandler(this.numOffX_Move_ValueChanged);
+            // 
+            // numOffX_Idle
+            // 
+            this.numOffX_Idle.Location = new System.Drawing.Point(65, 123);
+            this.numOffX_Idle.Name = "numOffX_Idle";
+            this.numOffX_Idle.Size = new System.Drawing.Size(54, 20);
+            this.numOffX_Idle.TabIndex = 3;
+            this.numOffX_Idle.ValueChanged += new System.EventHandler(this.numOffX_Idle_ValueChanged);
+            // 
+            // numOffY_Die
+            // 
+            this.numOffY_Die.Location = new System.Drawing.Point(131, 201);
+            this.numOffY_Die.Name = "numOffY_Die";
+            this.numOffY_Die.Size = new System.Drawing.Size(54, 20);
+            this.numOffY_Die.TabIndex = 4;
+            this.numOffY_Die.ValueChanged += new System.EventHandler(this.numOffY_Die_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 203);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Off. die";
+            // 
+            // numOffY_Birth
+            // 
+            this.numOffY_Birth.Location = new System.Drawing.Point(131, 175);
+            this.numOffY_Birth.Name = "numOffY_Birth";
+            this.numOffY_Birth.Size = new System.Drawing.Size(54, 20);
+            this.numOffY_Birth.TabIndex = 4;
+            this.numOffY_Birth.ValueChanged += new System.EventHandler(this.numOffY_Birth_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 177);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Off. birth";
+            // 
+            // numOffY_Move
+            // 
+            this.numOffY_Move.Location = new System.Drawing.Point(131, 149);
+            this.numOffY_Move.Name = "numOffY_Move";
+            this.numOffY_Move.Size = new System.Drawing.Size(54, 20);
+            this.numOffY_Move.TabIndex = 4;
+            this.numOffY_Move.ValueChanged += new System.EventHandler(this.numOffY_Move_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 151);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Off. move";
+            // 
+            // numOffY_Idle
+            // 
+            this.numOffY_Idle.Location = new System.Drawing.Point(131, 123);
+            this.numOffY_Idle.Name = "numOffY_Idle";
+            this.numOffY_Idle.Size = new System.Drawing.Size(54, 20);
+            this.numOffY_Idle.TabIndex = 4;
+            this.numOffY_Idle.ValueChanged += new System.EventHandler(this.numOffY_Idle_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 125);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Off. idle";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnBrowse);
             this.groupBox2.Controls.Add(this.txtTexturePath);
-            this.groupBox2.Controls.Add(this.numOffX);
             this.groupBox2.Controls.Add(this.numDivX);
-            this.groupBox2.Controls.Add(this.numOffY);
-            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.numDivY);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(194, 166);
+            this.groupBox2.Size = new System.Drawing.Size(194, 138);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Texture";
             // 
             // btnBrowse
             // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBrowse.Font = new System.Drawing.Font("Segoe Print", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(6, 98);
+            this.btnBrowse.Location = new System.Drawing.Point(6, 70);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(175, 62);
             this.btnBrowse.TabIndex = 6;
@@ -338,36 +464,12 @@
             // 
             // txtTexturePath
             // 
-            this.txtTexturePath.Location = new System.Drawing.Point(13, 72);
+            this.txtTexturePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTexturePath.Location = new System.Drawing.Point(13, 44);
             this.txtTexturePath.Name = "txtTexturePath";
             this.txtTexturePath.Size = new System.Drawing.Size(175, 20);
             this.txtTexturePath.TabIndex = 5;
             this.txtTexturePath.Leave += new System.EventHandler(this.txtTexturePath_Leave);
-            // 
-            // numOffX
-            // 
-            this.numOffX.Location = new System.Drawing.Point(68, 42);
-            this.numOffX.Name = "numOffX";
-            this.numOffX.Size = new System.Drawing.Size(54, 20);
-            this.numOffX.TabIndex = 3;
-            this.numOffX.ValueChanged += new System.EventHandler(this.numOffX_ValueChanged);
-            // 
-            // numOffY
-            // 
-            this.numOffY.Location = new System.Drawing.Point(134, 42);
-            this.numOffY.Name = "numOffY";
-            this.numOffY.Size = new System.Drawing.Size(54, 20);
-            this.numOffY.TabIndex = 4;
-            this.numOffY.ValueChanged += new System.EventHandler(this.numOffY_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(24, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Off.";
             // 
             // toolStrip1
             // 
@@ -379,7 +481,7 @@
             this.btnHelp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(624, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(717, 25);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -430,15 +532,30 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.comboBox1);
             this.groupBox3.Controls.Add(this.chkPassable);
             this.groupBox3.Controls.Add(this.chkVulnerable);
             this.groupBox3.Controls.Add(this.cboMobBrick);
-            this.groupBox3.Location = new System.Drawing.Point(15, 336);
+            this.groupBox3.Location = new System.Drawing.Point(12, 407);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(191, 93);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Attribute";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Random movement",
+            "Focus Boom",
+            "Focus Boomer"});
+            this.comboBox1.Location = new System.Drawing.Point(101, 20);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(85, 21);
+            this.comboBox1.TabIndex = 3;
             // 
             // chkPassable
             // 
@@ -471,7 +588,7 @@
             "Brick"});
             this.cboMobBrick.Location = new System.Drawing.Point(10, 20);
             this.cboMobBrick.Name = "cboMobBrick";
-            this.cboMobBrick.Size = new System.Drawing.Size(175, 21);
+            this.cboMobBrick.Size = new System.Drawing.Size(85, 21);
             this.cboMobBrick.TabIndex = 0;
             this.cboMobBrick.SelectedIndexChanged += new System.EventHandler(this.cboMobBrick_SelectedIndexChanged);
             // 
@@ -560,7 +677,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 442);
+            this.ClientSize = new System.Drawing.Size(717, 512);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -595,10 +712,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDivY)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Die)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Birth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Move)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffX_Idle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Die)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Birth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Move)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOffY_Idle)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOffX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOffY)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -634,8 +757,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown numOffX;
-        private System.Windows.Forms.NumericUpDown numOffY;
+        private System.Windows.Forms.NumericUpDown numOffX_Idle;
+        private System.Windows.Forms.NumericUpDown numOffY_Idle;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TextBox txtTexturePath;
@@ -660,6 +783,16 @@
         private System.Windows.Forms.ToolStripMenuItem mnSave;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnRefresh;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown numOffX_Die;
+        private System.Windows.Forms.NumericUpDown numOffX_Birth;
+        private System.Windows.Forms.NumericUpDown numOffX_Move;
+        private System.Windows.Forms.NumericUpDown numOffY_Die;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numOffY_Birth;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown numOffY_Move;
+        private System.Windows.Forms.Label label7;
     }
 }
 

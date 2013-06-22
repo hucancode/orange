@@ -11,7 +11,6 @@ namespace Orange.GameProcessing.Logics
         public Map map;
         public void Solve()
         {
-            if (map.mobs.Count == 0) return;
             if (map.fires.Count == 0) return;
             bool[,] fireMap = new bool[(int)map.size.X, (int)map.size.Y];
             foreach (Fire item in map.fires)
@@ -53,7 +52,7 @@ namespace Orange.GameProcessing.Logics
                     map.brickMap[x, y] = false;
                     PowerUp power = new PowerUp(new Vector2(x,y));
                     Random r = new Random();
-                    int n = r.Next(15);
+                    int n = r.Next(10);
                     if (n == 0)
                     {
                         power.Kind = PowerKind.FIRE_BOOST;
@@ -69,12 +68,6 @@ namespace Orange.GameProcessing.Logics
                     else if (n == 2)
                     {
                         power.Kind = PowerKind.SPEED_BOOST;
-                        power.RefreshIcon();
-                        map.powers.Add(power);
-                    }
-                    else// debug
-                    {
-                        power.Kind = PowerKind.MAX_BOOM_BOOST;
                         power.RefreshIcon();
                         map.powers.Add(power);
                     }

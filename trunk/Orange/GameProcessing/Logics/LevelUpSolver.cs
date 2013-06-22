@@ -39,7 +39,22 @@ namespace Orange.GameProcessing.Logics
             }
             if (map.mobs.Count == 0)
             {
-                map.LoadXml("Content/Map/"+fileQueue.Dequeue());
+                if (map.keyPosition.X > 0 && map.keyPosition.Y > 0)
+                {
+                    foreach (Boomer item in map.boomers)
+                    {
+                        if (item.GridPosition == map.keyPosition)
+                        {
+                            map.LoadXml("Content/Map/" + fileQueue.Dequeue());
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    map.LoadXml("Content/Map/" + fileQueue.Dequeue());
+                }
+                
             }
             if (map.boomers.Count == 0)
             {
