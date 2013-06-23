@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="spike_turtle" divide_x="10" divide_y="11" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="47" offset_x="39" offset_y="48" />
+    <move begin="48" end="87" offset_x="62" offset_y="70" />
+    <birth begin="88" end="103" offset_x="61" offset_y="88" />
+    <die begin="88" end="103" offset_x="61" offset_y="88" />
+  </animation>
+</mob>
