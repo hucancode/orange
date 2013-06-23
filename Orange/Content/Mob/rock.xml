@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="rock_sheet" divide_x="11" divide_y="13" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="47" offset_x="136" offset_y="112" />
+    <move begin="48" end="71" offset_x="124" offset_y="107" />
+    <birth begin="72" end="119" offset_x="135" offset_y="112" />
+    <die begin="120" end="139" offset_x="137" offset_y="115" />
+  </animation>
+</mob>

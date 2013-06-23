@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="dinosaur_sheet" divide_x="11" divide_y="11" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="57" end="65" offset_x="133" offset_y="133" />
+    <move begin="0" end="22" offset_x="132" offset_y="139" />
+    <birth begin="101" end="111" offset_x="130" offset_y="129" />
+    <die begin="77" end="88" offset_x="136" offset_y="134" />
+  </animation>
+</mob>

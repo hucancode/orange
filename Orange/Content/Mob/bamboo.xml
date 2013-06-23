@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="bamboo" divide_x="13" divide_y="14" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="47" offset_x="28" offset_y="58" />
+    <move begin="48" end="73" offset_x="137" offset_y="141" />
+    <birth begin="74" end="143" offset_x="137" offset_y="141" />
+    <die begin="148" end="176" offset_x="135" offset_y="142" />
+  </animation>
+</mob>

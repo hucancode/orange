@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mob>
+  <texture file="ghost_sheet" divide_x="11" divide_y="12" />
+  <attribute vulnerable="False" passable="False" />
+  <animation>
+    <idle begin="0" end="47" offset_x="118" offset_y="128" />
+    <move begin="48" end="65" offset_x="128" offset_y="131" />
+    <birth begin="104" end="127" offset_x="137" offset_y="134" />
+    <die begin="85" end="105" offset_x="0" offset_y="0" />
+  </animation>
+</mob>
