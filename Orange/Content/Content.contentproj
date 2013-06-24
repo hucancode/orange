@@ -732,12 +732,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stuff\banner_lose.png">
+    <Compile Include="etc\banner_lose.png">
       <Name>banner_lose</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Stuff\banner_win.png">
+    <Compile Include="etc\banner_win.png">
       <Name>banner_win</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -894,6 +894,23 @@
     </Compile>
     <Compile Include="etc\title.png">
       <Name>title</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="etc\btnDOWN.png">
+      <Name>btnDOWN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="etc\btnNORMAL.png">
+      <Name>btnNORMAL</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="etc\btnUP.png">
+      <Name>btnUP</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
