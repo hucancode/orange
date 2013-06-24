@@ -16,7 +16,7 @@ namespace Orange.GameRender.Scenes
         private Sprite banner_lose;
         public SceneLose()
         {
-            banner_lose = new Sprite("stuff/banner_lose", Vector2.Zero, 1);
+            banner_lose = new Sprite("etc/banner_lose", Vector2.Zero, 1);
             banner_lose.position=new Vector2(400 - banner_lose.texture.Width / 2,
                 300 - banner_lose.texture.Height / 2);
         }

@@ -262,6 +262,7 @@ namespace MobEditor
                 if (dlgSaveXML.ShowDialog() != DialogResult.OK) return;
                 currentFile = dlgSaveXML.FileName;
             }
+            // bat dau luu
             XmlDocument doc = new XmlDocument();
             XmlElement rootTAG;
             if (cboMobBrick.SelectedIndex == 0)
