@@ -120,8 +120,6 @@ Content\Brick\image311.Animation.xnb
 Content\Brick\image314.Animation.xnb
 Content\Mob\401-@63-67-6-8.xnb
 Content\Boom\water_boom.xnb
-Content\Stuff\banner_lose.xnb
-Content\Stuff\banner_win.xnb
 Content\Mob\spike_turtle.xnb
 Content\etc\boost_speed.xnb
 Content\etc\boost_boom_length.xnb
@@ -139,6 +137,11 @@ Content\etc\exit_up.xnb
 Content\etc\newgame_normal.xnb
 Content\etc\newgame_up.xnb
 Content\etc\title.xnb
+Content\etc\banner_lose.xnb
+Content\etc\banner_win.xnb
+Content\etc\btnDOWN.xnb
+Content\etc\btnNORMAL.xnb
+Content\etc\btnUP.xnb
 Content\Map\12345.xml
 Content\Mob\330.xml
 Content\Mob\357.xml
