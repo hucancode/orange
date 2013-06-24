@@ -17,7 +17,7 @@ namespace Orange.GameRender.Scenes
         private Sprite banner_win;
         public SceneWin()
         {
-            banner_win = new Sprite("stuff/banner_win", Vector2.Zero, 1);
+            banner_win = new Sprite("etc/banner_win", Vector2.Zero, 1);
             banner_win.position = new Vector2(400-banner_win.texture.Width/2,
                 300-banner_win.texture.Height/2);
             

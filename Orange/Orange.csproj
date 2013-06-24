@@ -97,6 +97,7 @@
     <Compile Include="GameProcessing\Logics\MovingSolver.cs" />
     <Compile Include="GameProcessing\Logics\FireSolver.cs" />
     <Compile Include="GameRender\Scenes\SceneLose.cs" />
+    <Compile Include="GameRender\Scenes\SceneTitle.cs" />
     <Compile Include="GameRender\Scenes\SceneWin.cs" />
     <Compile Include="GameRender\Scenes\SceneMap.cs" />
     <Compile Include="OrangeInput.cs" />
