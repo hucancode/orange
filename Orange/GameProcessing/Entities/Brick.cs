@@ -67,7 +67,7 @@ namespace Orange.GameProcessing.Entities
                 Dispose();
             }
         }
-        public void Kill()
+        public override void Kill()
         {
             if (IsDead()) return;
             base.Kill();

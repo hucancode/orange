@@ -57,7 +57,7 @@ namespace Orange.GameProcessing.Entities
             sprite.position.X = mapPosition.X - offset.X;
             sprite.position.Y = mapPosition.Y - offset.Y;
         }
-        public void Kill()
+        public override void Kill()
         {
             if (IsDead()) return;
             state = 2;

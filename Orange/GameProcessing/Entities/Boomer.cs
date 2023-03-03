@@ -84,7 +84,7 @@ namespace Orange.GameProcessing.Entities
                     animation.PlayAnimation(animation.frameStart - 1, animation.frameStart - 1);
             }
         }
-        public void Kill()
+        public override void Kill()
         {
             if (IsDead()) return;
             base.Kill();

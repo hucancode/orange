@@ -71,7 +71,7 @@ namespace Orange.GameProcessing.Entities
             if (animation.isStop)
                 Dispose();
         }
-        public void Kill()
+        public override void Kill()
         {
             if (IsDead()) return;
             base.Kill();

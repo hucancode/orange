@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C# Express 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orange", "Orange\Orange.csproj", "{76C1142F-15A7-4997-8271-F9716E38822B}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orange", "Orange\Orange.csproj", "{76C1142F-15A7-4997-8271-F9716E38822B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OranceMapEditor", "OranceMapEditor\OranceMapEditor.csproj", "{15A2E477-6B41-46F6-A137-9F3BD0E9213D}"
 EndProject
@@ -19,8 +21,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Any CPU.Build.0 = Debug|x86
-		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|x86.ActiveCfg = Debug|x86
 		{76C1142F-15A7-4997-8271-F9716E38822B}.Debug|x86.Build.0 = Debug|x86
 		{76C1142F-15A7-4997-8271-F9716E38822B}.Release|Any CPU.ActiveCfg = Release|x86
@@ -48,14 +50,11 @@ Global
 		{F8CEE557-A42F-41AA-A6A3-3505AB0E8414}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F8CEE557-A42F-41AA-A6A3-3505AB0E8414}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F8CEE557-A42F-41AA-A6A3-3505AB0E8414}.Release|x86.ActiveCfg = Release|Any CPU
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Debug|x86.ActiveCfg = Debug|x86
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Release|Any CPU.ActiveCfg = Release|x86
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{EED88475-40DD-4C15-89FF-8FE77AAB4DFF}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8FED569-F522-4B9A-A0BD-EDC66BAFDFEE}
 	EndGlobalSection
 EndGlobal
